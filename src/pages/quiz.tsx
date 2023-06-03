@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '@component/header';
 import Canvas from '@component/Canvas';
 import Editor from '@component/Editor';
@@ -14,6 +14,24 @@ export default function Quiz() {
   const [cssState, setCssState] = useState(cssDefaultState);
   const [activeHtmlStateTab, setActiveCodeTab] = useState(true);
   const [activeUserViewTab, setActiveUserViewTab] = useState(true);
+
+  const [timer, setTimer] = useState(null);
+
+  useEffect(() => {
+    if (timer) {
+      // DEBOUNCING
+      // 채점중 문구 표시
+    } else {
+      // 채점 점수 보여줌
+    }
+  }, [timer]);
+
+  useEffect(() => {
+    // update index db
+    // update user canvas (canvas에 넘기는것으로 구현. 여기 useEffect에서 작동하지 않음)
+    // 채점
+  }, [htmlState, cssState]);
+
   return (
     <div className={styles.wrap}>
       <Header />
@@ -42,13 +60,13 @@ export default function Quiz() {
           <div className={classnames(styles.code, { [styles.activate]: activeHtmlStateTab })}>
             <span className={styles.code_label}>html</span>
             <div className={styles.code_inner}>
-              <Editor lang="html" initialString={htmlState} setState={setHtmlState} />
+              <Editor lang="html" initialString={htmlState} setState={setHtmlState} timer={timer} setTimer={setTimer} />
             </div>
           </div>
           <div className={classnames(styles.code, { [styles.activate]: !activeHtmlStateTab })}>
             <span className={styles.code_label}>css</span>
             <div className={styles.code_inner}>
-              <Editor lang="css" initialString={cssState} setState={setCssState} />
+              <Editor lang="css" initialString={cssState} setState={setCssState} timer={timer} setTimer={setTimer} />
             </div>
           </div>
         </div>
