@@ -11,16 +11,18 @@ async function getPixelData(htmlString: string, cssString: string) {
 
 function calcSpectrum(userPixels, answerPixels) {
   const pixelLength = userPixels.length;
-  const spectrum = new Array(256).fill(0);
+  const spectrums = new Array(4).fill(null).map(() => new Array(256).fill(0));
 
-  // 데스크톱에서 약 3ms 계산
-  for (let i = 0; i < pixelLength; i += 1) {
-    spectrum[userPixels[i]] += 1;
-    spectrum[answerPixels[i]] -= 1;
+  for (let i = 0; i < pixelLength; i += 4) {
+    for (let j = 0; j < 4; j += 1) {
+      // rgba
+      spectrums[j][userPixels[i + j]] += 1;
+      spectrums[j][answerPixels[i + j]] -= 1;
+    }
   }
 
-  const MAX_DIFF = pixelLength / 4;
-  const difference = spectrum.reduce((acc, cur) => acc + Math.abs(cur), 0);
+  const MAX_DIFF = pixelLength * 2;
+  const difference = spectrums.map((spectrum) => spectrum.reduce((acc, cur) => acc + Math.abs(cur), 0)).reduce((acc, cur) => acc + cur, 0);
   return 1 - difference / MAX_DIFF;
 }
 
