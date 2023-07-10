@@ -45,7 +45,7 @@ export default function Make() {
 
       const reader = new FileReader();
       reader.addEventListener('load', () => {
-        const jsonData = JSON.parse(reader.result);
+        const jsonData = JSON.parse(reader.result.toString());
         const {
           name: loadedName,
           category: loadedCategory,

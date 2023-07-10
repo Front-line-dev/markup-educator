@@ -37,6 +37,7 @@ export default function Index() {
             answerHtml=""
             answerCss=""
             handleActivate={setActiveUserViewTab}
+            iframeListenerReady={true}
           />
           <div className={styles.start}>
             <Link href="./quiz/1" className={classnames(styles.link_start, 'contrast')}>
