@@ -1,21 +1,26 @@
-import { useState } from "react";
+import { useState } from 'react';
+import classnames from 'classnames';
 import Link from 'next/link';
-import styles from "./header.module.scss";
+import styles from './header.module.scss';
 
-function Header() {
-  const [quizListOpened, setQuizListOpened] = useState(false)
-  const [copySuccessPopupVisible, setCopySuccessPopupVisible] = useState(false)
+interface HeaderProps {
+  resetHandler: Function;
+}
+
+function Header({ resetHandler }: HeaderProps) {
+  const [quizListOpened, setQuizListOpened] = useState(false);
+  const [copySuccessPopupVisible, setCopySuccessPopupVisible] = useState(false);
   function toggleQuizListOpened() {
     document.body.classList.toggle('modal_opened', !quizListOpened);
-    setQuizListOpened(!quizListOpened)
+    setQuizListOpened(!quizListOpened);
   }
 
   function copyUrlButtonHandler() {
-    setCopySuccessPopupVisible(true)
+    setCopySuccessPopupVisible(true);
     setTimeout(() => {
-      setCopySuccessPopupVisible(false)
+      setCopySuccessPopupVisible(false);
     }, 3400);
-  };
+  }
   return (
     <header className={styles.container}>
       <h1 className={styles.title}>
@@ -24,13 +29,16 @@ function Header() {
         </a>
       </h1>
       <div className={styles.button_area}>
-        <button type="button" className={styles.button} onClick={copyUrlButtonHandler}>
+        <button type="button" className={classnames(styles.top_button, styles.reset_button)} onClick={resetHandler}>
+          <span className="blind">코드 초기화</span>
+        </button>
+        <button type="button" className={classnames(styles.top_button, styles.share_button)} onClick={copyUrlButtonHandler}>
           <span className="blind">공유</span>
         </button>
         <button type="button" onClick={toggleQuizListOpened} className={styles.quiz_button}>
           <span className="blind">퀴즈목록</span>
         </button>
-        {quizListOpened &&
+        {quizListOpened && (
           <div className={styles.overlay}>
             <div className={styles.dimmed} onClick={toggleQuizListOpened} />
             <div className={styles.quiz_list_area}>
@@ -38,9 +46,7 @@ function Header() {
                 <button type="button" className={styles.close_button} onClick={toggleQuizListOpened}>
                   <span className="blind">닫기</span>
                 </button>
-                <strong className={styles.title}>
-                  퀴즈 리스트
-                </strong>
+                <strong className={styles.title}>퀴즈 리스트</strong>
               </div>
               <div className={styles.quiz_box}>
                 <em className={styles.quiz_level}>초급</em>
@@ -82,12 +88,10 @@ function Header() {
               </div>
             </div>
           </div>
-        }
-        {copySuccessPopupVisible &&
-          <p className={styles.copy_popup_text}>복사 되었습니다</p>
-        }
+        )}
+        {copySuccessPopupVisible && <p className={styles.copy_popup_text}>복사 되었습니다</p>}
       </div>
-    </header >
-  )
+    </header>
+  );
 }
-export default Header
+export default Header;
