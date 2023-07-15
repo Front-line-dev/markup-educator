@@ -1,0 +1,8 @@
+{
+  "name": "flex, absolute 활용",
+  "category": "",
+  "defaultUserHtml": "<ul>\n  <li class=\"item\">\n    일\n  </li>\n  <li class=\"item\">\n    이\n  </li>\n  <li class=\"item\">\n    삼\n  </li>\n</ul>",
+  "defaultUserCss": "ul {\n  margin: 0;\n  padding: 0;\n}\n.item {\n  list-style: none;\n  padding: 10px;\n  border: 1px solid white;\n  color: white;\n  border-radius: 10px;\n  background-color: green;\n  + .item {\n    margin-right: 10px;\n  }\n  &:first-child::before {\n    border: 1px solid white;\n    border-radius: 50%;\n    background-color: red;\n    content: '';\n  }\n}",
+  "answerHtml": "<ul>\n  <li class=\"item\">\n    일\n  </li>\n  <li class=\"item\">\n    이\n  </li>\n  <li class=\"item\">\n    삼\n  </li>\n</ul>",
+  "answerCss": "ul {\n  margin: 0;\n  padding: 0;\n  display: flex;\n  flex-direction: row-reverse;\n  justify-content: left;\n}\n.item {\n  list-style: none;\n  position: relative;\n  padding: 10px;\n  border: 1px solid white;\n  color: white;\n  border-radius: 10px;\n  background-color: green;\n  + .item {\n    margin-right: 10px;\n  }\n  &:first-child::before {\n    position: absolute;\n    top: 0;\n    right: 0;\n    width: 10px;\n    height: 10px;\n    border: 1px solid white;\n    border-radius: 50%;\n    background-color: red;\n    content: '';\n  }\n}"
+}

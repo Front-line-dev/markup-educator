@@ -2,10 +2,14 @@
   display: flex;
   align-items: center;
   width: 100%;
+  max-width: 970px;
   padding: 0 20px;
   box-sizing: border-box;
   font-size: 18px;
   background-color: #526159;
+  @include mediaQuery('pc_wide') {
+    max-width: 1600px;
+  }
 }
 .title {
   font-size: 17px;
@@ -37,9 +41,7 @@
   height: 30px;
   border: none;
   vertical-align: top;
-  background: linear-gradient(#fff 50%, transparent 50%);
-  background-size: 100% 12px;
-  cursor: pointer;
+  background: url('assets/menu.svg') no-repeat center/cover;
 }
 .overlay {
   position: fixed;
@@ -87,21 +89,7 @@
   left: 0;
   width: 40px;
   height: 40px;
-  &::before,
-  &::after {
-    position: absolute;
-    top: 1px;
-    right: 18px;
-    width: 5px;
-    height: 38px;
-    background-color: #fff;
-    transform: rotate(45deg);
-    content: '';
-  }
-  &::after {
-    left: 17px;
-    transform: rotate(-45deg);
-  }
+  background: url('assets/close.svg') no-repeat center/cover;
 }
 .quiz_box {
   margin: 20px 20px 0;
