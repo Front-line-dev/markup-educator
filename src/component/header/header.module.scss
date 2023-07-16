@@ -15,21 +15,31 @@
 .button_area {
   margin-left: auto;
 }
-.button {
+.top_button {
   width: 30px;
   height: 30px;
+  margin-right: 10px;
   vertical-align: top;
-  background: url('./assets/share.png') no-repeat center/cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  cursor: pointer;
+}
+.reset_button {
+  background-image: url('./assets/reset.svg');
+}
+.share_button {
+  background-image: url('./assets/share.svg');
 }
 .quiz_button {
   position: relative;
   width: 30px;
   height: 30px;
-  margin-left: 10px;
   border: none;
   vertical-align: top;
   background: linear-gradient(#fff 50%, transparent 50%);
   background-size: 100% 12px;
+  cursor: pointer;
 }
 .overlay {
   position: fixed;

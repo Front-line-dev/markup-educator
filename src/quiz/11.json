@@ -1,0 +1,8 @@
+{
+    "name": "news",
+    "category": "1",
+    "defaultUserHtml": "<main>\n  <p>\n    <img src=\"/assets/thumbnail.jpg\" width=\"50\" height=\"50\">\n    <img src=\"/assets/thumbnail.jpg\" width=\"50\" height=\"210\">\n    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit.\n      Sed, hic error non quia explicabo asperiores ullam ex deleniti quasi eligendi.\n      Doloremque quia aspernatur eligendi hic,\n    </span>\n  </p>\n</main>\n<footer>\n  This is Footer\n</footer>",
+    "defaultUserCss": "main {\n  border: 1px solid black;\n  padding: 0.5em;\n}\n\np {\n  margin: 0;\n}\n\np img:first-of-type {\n  margin-right: 0.5em;\n}\n\np img:last-of-type {\n  margin-left: 0.5em;\n}\n\nfooter {\n  margin-top: 0.5em;\n  background-color: lightgreen;\n  text-align: center;\n  line-height: 2em;\n}",
+    "answerHtml": "<main>\n  <p>\n    <img src=\"/assets/thumbnail.jpg\" width=\"50\" height=\"50\">\n    <img src=\"/assets/thumbnail.jpg\" width=\"50\" height=\"210\">\n    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit.\n      Sed, hic error non quia explicabo asperiores ullam ex deleniti quasi eligendi.\n      Doloremque quia aspernatur eligendi hic,\n    </span>\n  </p>\n</main>\n<footer>\n  This is Footer\n</footer>",
+    "answerCss": "main {\n  border: 1px solid black;\n  padding: 0.5em;\n}\n\np {\n  margin: 0;\n  overflow: hidden;\n  word-break: break-all;\n}\n\np::first-letter {\n  font-size: 2em;\n}\n\np img:first-of-type {\n  float: left;\n  margin-right: 0.5em;\n}\n\np img:last-of-type {\n  float: right;\n  margin-left: 0.5em;\n  object-fit: cover;\n}\n\nfooter {\n  margin-top: 0.5em;\n  background-color: lightgreen;\n  text-align: center;\n  line-height: 2em;\n}"
+}

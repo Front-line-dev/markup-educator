@@ -70,9 +70,14 @@ export default function Quiz({ id, name, defaultUserHtml, defaultUserCss, answer
     }
   }, [userHtml, userCss, id]);
 
+  function resetHandler() {
+    setUserHtml(defaultUserHtml);
+    setUserCss(defaultUserCss);
+  }
+
   return (
     <div className={styles.wrap}>
-      <Header />
+      <Header resetHandler={resetHandler} />
       <main className={styles.main}>
         <QuizEditor
           wrapperClass={styles.editor}
