@@ -35,7 +35,7 @@ function Header({ resetHandler }: HeaderProps) {
         <button type="button" className={classnames(styles.top_button, styles.share_button)} onClick={copyUrlButtonHandler}>
           <span className="blind">공유</span>
         </button>
-        <button type="button" onClick={toggleQuizListOpened} className={styles.quiz_button}>
+        <button type="button" onClick={toggleQuizListOpened} className={classnames(styles.top_button, styles.quiz_button)}>
           <span className="blind">퀴즈목록</span>
         </button>
         {quizListOpened && (
