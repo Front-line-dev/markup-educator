@@ -22,12 +22,14 @@
 .top_button {
   width: 30px;
   height: 30px;
-  margin-right: 10px;
   vertical-align: top;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
   cursor: pointer;
+  & + & {
+    margin-left: 10px;
+  }
 }
 .reset_button {
   background-image: url('./assets/reset.svg');
@@ -36,13 +38,7 @@
   background-image: url('./assets/share.svg');
 }
 .quiz_button {
-  position: relative;
-  width: 30px;
-  height: 30px;
-  border: none;
-  vertical-align: top;
-  background: url('assets/menu.svg') no-repeat center/cover;
-  cursor: pointer;
+  background-image: url('./assets/menu.svg');
 }
 .overlay {
   position: fixed;
