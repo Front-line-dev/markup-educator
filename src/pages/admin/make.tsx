@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import useDownloader from 'react-use-downloader';
+import classnames from 'classnames';
 import Editor from '@component/Editor';
 import Canvas from '@component/Canvas';
 import styles from './make.module.scss';
@@ -82,7 +83,15 @@ export default function Make() {
           <Editor lang="html" initialString={answerHtml} setString={setAnswerHtml} setDebouncing={setDebouncing} />
           <Editor lang="css" initialString={answerCss} setString={setAnswerCss} setDebouncing={setDebouncing} />
         </div>
-        <div className={styles.canvas_wrap}>
+        <div className={classnames(styles.canvas_wrap, styles.tablet)}>
+          <Canvas html={userHtml} css={userCss} />
+          <Canvas html={answerHtml} css={answerCss} />
+        </div>
+        <div className={classnames(styles.canvas_wrap, styles.pc)}>
+          <Canvas html={userHtml} css={userCss} />
+          <Canvas html={answerHtml} css={answerCss} />
+        </div>
+        <div className={classnames(styles.canvas_wrap, styles.mobile)}>
           <Canvas html={userHtml} css={userCss} />
           <Canvas html={answerHtml} css={answerCss} />
         </div>

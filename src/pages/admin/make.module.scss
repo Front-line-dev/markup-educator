@@ -17,10 +17,31 @@
 .canvas_wrap {
   display: flex;
   gap: 50px;
+  margin-bottom: 20px;
 
   & > * {
-    width: 500px;
-    height: 500px;
+    background-color: #272822;
+  }
+
+  &.mobile {
+    & > * {
+      width: 294px;
+      height: 294px;
+    }
+  }
+
+  &.tablet {
+    & > * {
+      width: 476px;
+      height: 476px;
+    }
+  }
+
+  &.pc {
+    & > * {
+      width: 366px;
+      height: 366px;
+    }
   }
 }
 
