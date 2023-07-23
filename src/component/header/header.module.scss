@@ -6,13 +6,13 @@
   padding: 0 20px;
   box-sizing: border-box;
   font-size: 18px;
-  background-color: #526159;
+  background-color: #19b3e6;
   @include mediaQuery('pc_wide') {
     max-width: 1600px;
   }
 }
 .title {
-  font-size: 17px;
+  font-size: 20px;
   line-height: 40px;
   color: #fff;
 }
@@ -73,7 +73,7 @@
   }
   .title {
     display: block;
-    padding: 0 50px;
+    padding: 10px 50px;
     font-size: 25px;
     text-align: center;
   }
@@ -83,10 +83,15 @@
 }
 .close_button {
   position: absolute;
-  left: 0;
+  top: 10px;
+  left: 10px;
   width: 40px;
   height: 40px;
+  border-radius: 12px;
   background: url('assets/close.svg') no-repeat center/cover;
+  &:hover {
+    background-color: rgba(#fff, 0.15);
+  }
 }
 .quiz_box {
   margin: 20px 20px 0;
@@ -118,6 +123,16 @@
   color: #fff;
   background-color: rgba(#000, 0.7);
   animation: share ease-in-out 3.4s;
+}
+
+.link_quiz {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 12px;
+  vertical-align: top;
+  &:hover {
+    background-color: rgba(#fff, 0.15);
+  }
 }
 
 @keyframes popup {

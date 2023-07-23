@@ -95,6 +95,16 @@
   list-style: none;
 }
 
+.link_quiz {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 12px;
+  vertical-align: top;
+  &:hover {
+    background-color: rgba(#fff, 0.15);
+  }
+}
+
 @include mediaQuery('tablet') {
   .main {
     max-width: 970px;

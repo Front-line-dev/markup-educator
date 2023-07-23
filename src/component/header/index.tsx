@@ -43,10 +43,10 @@ function Header({ resetHandler }: HeaderProps) {
             <div className={styles.dimmed} onClick={toggleQuizListOpened} />
             <div className={styles.quiz_list_area}>
               <div className={styles.quiz_list_header}>
+                <strong className={styles.title}>퀴즈 리스트</strong>
                 <button type="button" className={styles.close_button} onClick={toggleQuizListOpened}>
                   <span className="blind">닫기</span>
                 </button>
-                <strong className={styles.title}>퀴즈 리스트</strong>
               </div>
               <div className={styles.quiz_box}>
                 <em className={styles.quiz_level}>초급</em>
