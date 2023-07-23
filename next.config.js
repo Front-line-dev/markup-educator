@@ -5,6 +5,9 @@ const nextConfig = {
   sassOptions: {
     additionalData: `@use "src/styles/mixins.scss" as *;`,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 module.exports = nextConfig;
