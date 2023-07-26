@@ -14,13 +14,28 @@
   }
 }
 
-.canvas_wrap {
+.canvas_row {
   display: flex;
   gap: 50px;
+  margin-bottom: 20px;
 
-  & > * {
-    width: 500px;
-    height: 500px;
+  .canvas_wrap {
+    background-color: #272822;
+  }
+
+  &.mobile .canvas_wrap {
+    width: 294px;
+    height: 294px;
+  }
+
+  &.tablet .canvas_wrap {
+    width: 476px;
+    height: 476px;
+  }
+
+  &.pc .canvas_wrap {
+    width: 366px;
+    height: 366px;
   }
 }
 

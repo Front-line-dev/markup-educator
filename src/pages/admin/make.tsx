@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import useDownloader from 'react-use-downloader';
+import classnames from 'classnames';
 import Editor from '@component/Editor';
 import Canvas from '@component/Canvas';
 import styles from './make.module.scss';
@@ -82,9 +83,29 @@ export default function Make() {
           <Editor lang="html" initialString={answerHtml} setString={setAnswerHtml} setDebouncing={setDebouncing} />
           <Editor lang="css" initialString={answerCss} setString={setAnswerCss} setDebouncing={setDebouncing} />
         </div>
-        <div className={styles.canvas_wrap}>
-          <Canvas html={userHtml} css={userCss} />
-          <Canvas html={answerHtml} css={answerCss} />
+        <div className={classnames(styles.canvas_row, styles.tablet)}>
+          <div className={styles.canvas_wrap}>
+            <Canvas html={userHtml} css={userCss} />
+          </div>
+          <div className={styles.canvas_wrap}>
+            <Canvas html={answerHtml} css={answerCss} />
+          </div>
+        </div>
+        <div className={classnames(styles.canvas_row, styles.pc)}>
+          <div className={styles.canvas_wrap}>
+            <Canvas html={userHtml} css={userCss} />
+          </div>
+          <div className={styles.canvas_wrap}>
+            <Canvas html={answerHtml} css={answerCss} />
+          </div>
+        </div>
+        <div className={classnames(styles.canvas_row, styles.mobile)}>
+          <div className={styles.canvas_wrap}>
+            <Canvas html={userHtml} css={userCss} />
+          </div>
+          <div className={styles.canvas_wrap}>
+            <Canvas html={answerHtml} css={answerCss} />
+          </div>
         </div>
         <div className={styles.control_wrap}>
           <label>
