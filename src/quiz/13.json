@@ -1,0 +1,8 @@
+{
+    "name": "그라디언트 둥근 모서리",
+    "category": "",
+    "defaultUserHtml": "<main>\n  <button type=\"button\" class=\"btn\"></button>\n</main>",
+    "defaultUserCss": "main {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 200px;\n  height: 200px;\n  background-color: white;\n}\n\n.btn {\n  /* 버튼 border width는 5px, linear-gradient(red, blue) */\n  width: 150px;\n  height: 150px;\n  font-size: 30px;\n  border-radius: 10px;\n  border: none;\n}",
+    "answerHtml": "<main>\n  <button type=\"button\" class=\"btn\"></button>\n</main>",
+    "answerCss": "main {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 200px;\n  height: 200px;\n  background-color: white;\n}\n\n.btn {\n  /* 버튼 border width는 5px, linear-gradient(red, blue) */\n  position: relative;\n  width: 150px;\n  height: 150px;\n  font-size: 30px;\n  border-radius: 10px;\n  border: none;\n}\n\n.btn::before {\n  position: absolute;\n  inset: 0;\n  background-image: linear-gradient(red, blue);\n  border-radius: inherit;\n  content: '';\n}\n\n.btn::after {\n  position: absolute;\n  inset: 5px;\n  background-color: white;\n  line-height: 150px;\n  border-radius: 5px;\n  content: 'click';\n}"
+}
