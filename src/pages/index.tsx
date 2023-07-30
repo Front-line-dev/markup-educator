@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import Link from 'next/link';
 import QuizEditor from '@component/quiz/QuizEditor';
 import QuizView from '@component/quiz/QuizView';
+import QuizList from '@quiz/list.json'
 import styles from './index.module.scss';
 
 const htmlDefaultState = `<div class="text">\n\tHello World\n</div>`;
@@ -13,6 +14,7 @@ export default function Index() {
   const [cssState, setCssState] = useState(cssDefaultState);
   const [activeHtmlStateTab, setActiveCodeTab] = useState(true);
   const [activeUserViewTab, setActiveUserViewTab] = useState(true);
+  const [quizList, setQuizList] = useState(QuizList);
 
   return (
     <div className={styles.wrap}>
@@ -37,7 +39,7 @@ export default function Index() {
             answerHtml=""
             answerCss=""
             handleActivate={setActiveUserViewTab}
-            iframeListenerReady={true}
+            iframeListenerReady
           />
           <div className={styles.start}>
             <Link href="./quiz/1" className={classnames(styles.link_start, 'contrast')}>
@@ -50,22 +52,42 @@ export default function Index() {
           <em className={styles.quiz_level}>초급</em>
           {/* 문제 수 받아서 처리 */}
           <ul className={styles.list_quiz}>
-            <li className={styles.item_quiz}>
-              <Link href="./quiz/1" className={styles.link_quiz}>
-                # Quiz 01
-              </Link>
-            </li>
+            {quizList.map((item) => (
+              item.difficulty === 'easy' && (
+                <li className={styles.item_quiz} key={item.id}>
+                  <Link href={`./quiz/${item.id}`} className={styles.link_quiz}>
+                    # Quiz {item.id}
+                  </Link>
+                </li>)
+            ))}
           </ul>
         </div>
         <div className={styles.quiz_box}>
           <em className={styles.quiz_level}>중급</em>
           {/* 문제 수 받아서 처리 */}
           <ul className={styles.list_quiz}>
-            <li className={styles.item_quiz}>
-              <Link href="./" className={styles.link_quiz}>
-                # Quiz 01
-              </Link>
-            </li>
+            {quizList.map((item) => (
+              item.difficulty === 'normal' && (
+                <li className={styles.item_quiz} key={item.id}>
+                  <Link href={`./quiz/${item.id}`} className={styles.link_quiz}>
+                    # Quiz {item.id}
+                  </Link>
+                </li>)
+            ))}
+          </ul>
+        </div>
+        <div className={styles.quiz_box}>
+          <em className={styles.quiz_level}>고급</em>
+          {/* 문제 수 받아서 처리 */}
+          <ul className={styles.list_quiz}>
+            {quizList.map((item) => (
+              item.difficulty === 'difficult' && (
+                <li className={styles.item_quiz} key={item.id}>
+                  <Link href={`./quiz/${item.id}`} className={styles.link_quiz}>
+                    # Quiz {item.id}
+                  </Link>
+                </li>)
+            ))}
           </ul>
         </div>
       </main>

@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "difficulty": "easy"
+  },
+  {
+    "id": 2,
+    "difficulty": "easy"
+  },
+  {
+    "id": 3,
+    "difficulty": "easy"
+  },
+  {
+    "id": 10,
+    "difficulty": "normal"
+  },
+  {
+    "id": 11,
+    "difficulty": "difficult"
+  }
+]
