@@ -1,0 +1,8 @@
+{
+  "name": "background-clip",
+  "category": "",
+  "defaultUserHtml": "<span class=\"text\">\n  Can You Markup ?\n</span>",
+  "defaultUserCss": ".text {\n  background-image: linear-gradient(45deg, #113843, #fff);\n  font-size: 30px;\n  font-weight: bold;\n  &::before {\n    content: '';\n    height: 15px;\n    background: #903843;\n  }\n}",
+  "answerHtml": "<span class=\"text\">\n  Can You Markup ?\n</span>",
+  "answerCss": ".text {\n  position: relative;\n  background-image: linear-gradient(45deg, #113843, #fff);\n  -webkit-background-clip: text;\n  font-size: 30px;\n  font-weight: bold;\n  color: transparent;\n  &::before {\n    content: '';\n    position: absolute;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    height: 15px;\n    background: #903843;\n    z-index: -1;\n  }\n}"
+}
