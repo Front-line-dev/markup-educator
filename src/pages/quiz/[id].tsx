@@ -27,6 +27,7 @@ export default function Quiz({ id, name, defaultUserHtml, defaultUserCss, answer
   const [score, setScore] = useState(0);
   const [comparing, setComparing] = useState(false);
   const [iframeListenerReady, setIframeListenerReady] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
 
   // db에서 코드 불러오기
   const dataBaseItem = useLiveQuery(() => db.markups.where('id').equals(id).toArray())?.shift();
@@ -45,8 +46,14 @@ export default function Quiz({ id, name, defaultUserHtml, defaultUserCss, answer
         // 요소에 접근해서 스코어 계산
         if (iframeMap.user && iframeMap.answer) {
           setComparing(true);
-          setScore(await compareMarkup(iframeMap.user, iframeMap.answer));
+          const currentScore = await compareMarkup(iframeMap.user, iframeMap.answer);
+          setScore(currentScore);
           setComparing(false);
+
+          // 정답일 경우 정답코드 보여줌
+          if (currentScore === 1) {
+            setShowAnswer(true);
+          }
         }
       }
     }
@@ -88,6 +95,7 @@ export default function Quiz({ id, name, defaultUserHtml, defaultUserCss, answer
           handleHtml={setUserHtml}
           handleCss={setUserCss}
           handleDebouncing={setDebouncing}
+          editable
         />
         <QuizView
           wrapperClass={styles.view}
@@ -100,6 +108,22 @@ export default function Quiz({ id, name, defaultUserHtml, defaultUserCss, answer
           iframeListenerReady={iframeListenerReady}
         />
         <QuizResult wrapperClassName={styles.grade} score={score} debouncing={debouncing} comparing={comparing} />
+        {showAnswer && (
+          <>
+            <strong className={styles.answer_title}>Answer Code</strong>
+            <QuizEditor
+              wrapperClass={styles.answer}
+              activate={activeHtmlStateTab}
+              html={answerHtml}
+              css={answerCss}
+              handleActivate={setActiveCodeTab}
+              handleHtml={setUserHtml}
+              handleCss={setUserCss}
+              handleDebouncing={setDebouncing}
+              editable={false}
+            />
+          </>
+        )}
       </main>
     </div>
   );
