@@ -62,7 +62,10 @@ function Header({ quizFileList, resetHandler }: HeaderProps) {
                   {quizFileList && quizFileList.map((item) => (
                     item.category === '1' && (
                       <li className={styles.item_quiz} key={item.id}>
-                        <Link href={`./quiz/${item.id}`} className={styles.link_quiz}>
+                        <a href={`./${item.id}`} className={styles.link_quiz}>
+                          # Quiz {item.id}
+                        </a>
+                        <Link href={`./${item.id}`} className={styles.link_quiz}>
                           # Quiz {item.id}
                         </Link>
                       </li>)
@@ -75,7 +78,7 @@ function Header({ quizFileList, resetHandler }: HeaderProps) {
                   {quizFileList && quizFileList.map((item) => (
                     item.category === '2' && (
                       <li className={styles.item_quiz} key={item.id}>
-                        <Link href={`./quiz/${item.id}`} className={styles.link_quiz}>
+                        <Link href={`./${item.id}`} className={styles.link_quiz}>
                           # Quiz {item.id}
                         </Link>
                       </li>)
@@ -88,7 +91,7 @@ function Header({ quizFileList, resetHandler }: HeaderProps) {
                   {quizFileList && quizFileList.map((item) => (
                     item.category === '3' && (
                       <li className={styles.item_quiz} key={item.id}>
-                        <Link href={`./quiz/${item.id}`} className={styles.link_quiz}>
+                        <Link href={`./${item.id}`} className={styles.link_quiz}>
                           # Quiz {item.id}
                         </Link>
                       </li>)
