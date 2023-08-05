@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import classnames from 'classnames';
-import { quizListToJsonFile } from '@lib/quiz/readFiles';
+import { readQuizFileList } from '@lib/quiz/readFiles';
 import Link from 'next/link';
 import QuizEditor from '@component/quiz/QuizEditor';
 import QuizView from '@component/quiz/QuizView';
@@ -24,7 +24,6 @@ export default function Index({ quizFileList }: QuizlistProps) {
   const [activeHtmlStateTab, setActiveCodeTab] = useState(true);
   const [activeUserViewTab, setActiveUserViewTab] = useState(true);
   const [quizlist, setQuizList] = useState([]);
-
   useEffect(() => {
     const quizfilelist = [...quizFileList];
     quizfilelist.sort((a, b) => (
@@ -112,7 +111,7 @@ export default function Index({ quizFileList }: QuizlistProps) {
 }
 
 export async function getStaticProps() {
-  const quizFileList = quizListToJsonFile();
+  const quizFileList = readQuizFileList(true);
   return {
     props: {
       quizFileList
