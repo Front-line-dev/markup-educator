@@ -9,16 +9,23 @@ import QuizView from '@component/quiz/QuizView';
 import compareMarkup from '@lib/score/compare';
 import styles from './quiz.module.scss';
 
-interface QuizParams {
+interface QuizlistProps {
+  quizFileList: QuizParams[];
   id: string;
   name: string;
+  category: string;
   defaultUserHtml: string;
   defaultUserCss: string;
   answerHtml: string;
   answerCss: string;
 }
 
-export default function Quiz({ id, name, defaultUserHtml, defaultUserCss, answerHtml, answerCss }: QuizParams) {
+interface QuizParams {
+  id: string;
+  category: string;
+}
+
+export default function Quiz({ quizFileList, id, name, category, defaultUserHtml, defaultUserCss, answerHtml, answerCss }: QuizlistProps) {
   const [userHtml, setUserHtml] = useState(defaultUserHtml);
   const [userCss, setUserCss] = useState(defaultUserCss);
   const [activeHtmlStateTab, setActiveCodeTab] = useState(true);
@@ -27,6 +34,8 @@ export default function Quiz({ id, name, defaultUserHtml, defaultUserCss, answer
   const [score, setScore] = useState(0);
   const [comparing, setComparing] = useState(false);
   const [iframeListenerReady, setIframeListenerReady] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [quizlist, setQuizList] = useState([]);
 
   // db에서 코드 불러오기
   const dataBaseItem = useLiveQuery(() => db.markups.where('id').equals(id).toArray())?.shift();
@@ -34,6 +43,14 @@ export default function Quiz({ id, name, defaultUserHtml, defaultUserCss, answer
     setUserHtml(dataBaseItem.htmlState);
     setUserCss(dataBaseItem.cssState);
   }
+
+  useEffect(() => {
+    const quizfilelist = [...quizFileList];
+    quizfilelist.sort((a, b) => (
+      a.id < b.id ? -1 : 1)
+    )
+    setQuizList(quizfilelist);
+  }, [quizFileList]);
 
   useEffect(() => {
     const iframeMap = { user: null, answer: null };
@@ -45,8 +62,14 @@ export default function Quiz({ id, name, defaultUserHtml, defaultUserCss, answer
         // 요소에 접근해서 스코어 계산
         if (iframeMap.user && iframeMap.answer) {
           setComparing(true);
-          setScore(await compareMarkup(iframeMap.user, iframeMap.answer));
+          const currentScore = await compareMarkup(iframeMap.user, iframeMap.answer);
+          setScore(currentScore);
           setComparing(false);
+
+          // 정답일 경우 정답코드 보여줌
+          if (currentScore === 1) {
+            setShowAnswer(true);
+          }
         }
       }
     }
@@ -77,7 +100,7 @@ export default function Quiz({ id, name, defaultUserHtml, defaultUserCss, answer
 
   return (
     <div className={styles.wrap}>
-      <Header resetHandler={resetHandler} />
+      <Header resetHandler={resetHandler} quizFileList={quizlist} />
       <main className={styles.main}>
         <QuizEditor
           wrapperClass={styles.editor}
@@ -88,6 +111,7 @@ export default function Quiz({ id, name, defaultUserHtml, defaultUserCss, answer
           handleHtml={setUserHtml}
           handleCss={setUserCss}
           handleDebouncing={setDebouncing}
+          editable
         />
         <QuizView
           wrapperClass={styles.view}
@@ -100,6 +124,22 @@ export default function Quiz({ id, name, defaultUserHtml, defaultUserCss, answer
           iframeListenerReady={iframeListenerReady}
         />
         <QuizResult wrapperClassName={styles.grade} score={score} debouncing={debouncing} comparing={comparing} />
+        {showAnswer && (
+          <>
+            <strong className={styles.answer_title}>Answer Code</strong>
+            <QuizEditor
+              wrapperClass={styles.answer}
+              activate={activeHtmlStateTab}
+              html={answerHtml}
+              css={answerCss}
+              handleActivate={setActiveCodeTab}
+              handleHtml={setUserHtml}
+              handleCss={setUserCss}
+              handleDebouncing={setDebouncing}
+              editable={false}
+            />
+          </>
+        )}
       </main>
     </div>
   );
@@ -115,7 +155,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const quizFileData = readQuizFileById(params.id);
+  const quizFileList = readQuizFileList(true);
   return {
-    props: { id: params.id, ...quizFileData },
+    props: { quizFileList, id: params.id, ...quizFileData }
   };
 }

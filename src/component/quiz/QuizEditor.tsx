@@ -13,9 +13,10 @@ interface QuizEditorProps {
   handleHtml: Dispatch<SetStateAction<string>>;
   handleCss: Dispatch<SetStateAction<string>>;
   handleDebouncing?: Dispatch<SetStateAction<boolean>>;
+  editable: boolean;
 }
 
-export default function QuizEditor({ wrapperClass, activate, html, css, handleActivate, handleHtml, handleCss, handleDebouncing }: QuizEditorProps) {
+export default function QuizEditor({ wrapperClass, activate, html, css, handleActivate, handleHtml, handleCss, handleDebouncing, editable }: QuizEditorProps) {
   const [htmlDebouncing, setHtmlDebouncing] = useState(false);
   const [cssDebouncing, setCssDebouncing] = useState(false);
 
@@ -35,13 +36,13 @@ export default function QuizEditor({ wrapperClass, activate, html, css, handleAc
         <div className={classnames(styles.code, { [styles.activate]: activate })}>
           <span className={styles.code_label}>html</span>
           <div className={styles.code_inner}>
-            <Editor lang="html" initialString={html} setString={handleHtml} setDebouncing={setHtmlDebouncing} />
+            <Editor lang="html" initialString={html} setString={handleHtml} setDebouncing={setHtmlDebouncing} editable={editable} />
           </div>
         </div>
         <div className={classnames(styles.code, { [styles.activate]: !activate })}>
           <span className={styles.code_label}>css</span>
           <div className={styles.code_inner}>
-            <Editor lang="css" initialString={css} setString={handleCss} setDebouncing={setCssDebouncing} />
+            <Editor lang="css" initialString={css} setString={handleCss} setDebouncing={setCssDebouncing} editable={editable} />
           </div>
         </div>
       </div>
