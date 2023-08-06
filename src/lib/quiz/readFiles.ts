@@ -6,6 +6,7 @@ export function readQuizFileList(haveCategory?: boolean) {
     return fileNames.map((fileName) => ({
       id: Number(fileName.replace('.json', '')),
       category: JSON.parse(fs.readFileSync(`src/quiz/${fileName}`, 'utf8')).category,
+      name: JSON.parse(fs.readFileSync(`src/quiz/${fileName}`, 'utf8')).name,
     }));
   return fileNames.map((fileName) => ({
     params: {

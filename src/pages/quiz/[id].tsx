@@ -23,6 +23,7 @@ interface QuizlistProps {
 interface QuizParams {
   id: string;
   category: string;
+  name: string;
 }
 
 export default function Quiz({ quizFileList, id, name, category, defaultUserHtml, defaultUserCss, answerHtml, answerCss }: QuizlistProps) {
