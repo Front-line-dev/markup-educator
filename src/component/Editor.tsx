@@ -9,6 +9,7 @@ interface EditorParams {
   initialString: string;
   setString: Dispatch<SetStateAction<string>>;
   setDebouncing: Dispatch<SetStateAction<boolean>>;
+  editable: boolean;
 }
 
 const LANG_MAP = {
@@ -16,7 +17,7 @@ const LANG_MAP = {
   css: [css()],
 };
 
-export default function Editor({ lang, initialString, setString, setDebouncing }: EditorParams) {
+export default function Editor({ lang, initialString, setString, setDebouncing, editable }: EditorParams) {
   const [timer, setTimer] = useState(null);
 
   const handleUpdate = (editorString: string) => {
@@ -34,5 +35,7 @@ export default function Editor({ lang, initialString, setString, setDebouncing }
     );
   };
 
-  return <CodeMirror value={initialString} theme={okaidia} width="100%" height="380px" extensions={LANG_MAP[lang]} onChange={handleUpdate} />;
+  return (
+    <CodeMirror value={initialString} theme={okaidia} width="100%" height="380px" extensions={LANG_MAP[lang]} onChange={handleUpdate} readOnly={!editable} />
+  );
 }

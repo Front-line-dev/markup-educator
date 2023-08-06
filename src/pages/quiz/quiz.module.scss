@@ -35,12 +35,26 @@
 
 .editor,
 .view,
-.grade {
+.grade,
+.answer {
   flex: 1 0 100%;
 }
 
 .view {
   order: 1;
+}
+
+.answer {
+  order: 4;
+}
+
+.answer_title {
+  margin: 40px 0;
+  color: #fff;
+  font-size: 40px;
+  text-align: center;
+  flex: 1 0 100%;
+  order: 3;
 }
 
 @include mediaQuery('tablet') {
