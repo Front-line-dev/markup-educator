@@ -1,6 +1,6 @@
 {
   "name": "position: z-index 사용",
-  "category": "",
+  "category": "2",
   "defaultUserHtml": "<div class=\"container\">\n  <div class=\"first\">\n    첫 번째\n  </div>\n  <div class=\"second\">\n    두 번째\n  </div>\n  <div class=\"third\">\n    세 번째\n  </div>\n</div>",
   "defaultUserCss": ".container {\n  position: relative;\n  height: 300px;\n  background-color: #303030;\n  color: #000;\n}\n.first {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 50px;\n  height: 50px;\n  background-color: #585;\n}\n.second {\n  position: absolute;\n  width: 300px;\n  height: 100px;\n  background-color: #0ff;\n  text-align: right;\n}\n.third {\n  position: absolute;\n  width: 250px;\n  height: 200px;\n  background-color: #fff;\n}",
   "answerHtml": "<div class=\"container\">\n  <div class=\"first\">\n    첫 번째\n  </div>\n  <div class=\"second\">\n    두 번째\n  </div>\n  <div class=\"third\">\n    세 번째\n  </div>\n</div>",

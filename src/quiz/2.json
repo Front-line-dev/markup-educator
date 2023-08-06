@@ -1,5 +1,6 @@
 {
   "name": "2 번째 페이지",
+  "category": "1",
   "defaultUserHtml": "<h1>Hiㅇㅇㅇㅇㅇㅇㅇ</h1>",
   "defaultUserCss": "h1 { font-size: 2em; color: blue; }",
   "answerHtml": "<h1>Hiㅇㅇㅇㅇㅇ</h1>",
