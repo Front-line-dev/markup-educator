@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import classnames from 'classnames';
-import Link from 'next/link';
 import styles from './header.module.scss';
 
 interface HeaderProps {
@@ -65,9 +64,6 @@ function Header({ quizFileList, resetHandler }: HeaderProps) {
                         <a href={`./${item.id}`} className={styles.link_quiz}>
                           # Quiz {item.id}
                         </a>
-                        <Link href={`./${item.id}`} className={styles.link_quiz}>
-                          # Quiz {item.id}
-                        </Link>
                       </li>)
                   ))}
                 </ul>
@@ -78,9 +74,9 @@ function Header({ quizFileList, resetHandler }: HeaderProps) {
                   {quizFileList && quizFileList.map((item) => (
                     item.category === '2' && (
                       <li className={styles.item_quiz} key={item.id}>
-                        <Link href={`./${item.id}`} className={styles.link_quiz}>
+                        <a href={`./${item.id}`} className={styles.link_quiz}>
                           # Quiz {item.id}
-                        </Link>
+                        </a>
                       </li>)
                   ))}
                 </ul>
@@ -91,9 +87,9 @@ function Header({ quizFileList, resetHandler }: HeaderProps) {
                   {quizFileList && quizFileList.map((item) => (
                     item.category === '3' && (
                       <li className={styles.item_quiz} key={item.id}>
-                        <Link href={`./${item.id}`} className={styles.link_quiz}>
+                        <a href={`./${item.id}`} className={styles.link_quiz}>
                           # Quiz {item.id}
-                        </Link>
+                        </a>
                       </li>)
                   ))}
                 </ul>
