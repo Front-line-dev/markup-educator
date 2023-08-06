@@ -102,6 +102,7 @@ export default function Quiz({ quizFileList, id, name, category, defaultUserHtml
     <div className={styles.wrap}>
       <Header resetHandler={resetHandler} quizFileList={quizlist} />
       <main className={styles.main}>
+        <div className={styles.name}>{name}</div>
         <QuizEditor
           wrapperClass={styles.editor}
           activate={activeHtmlStateTab}
