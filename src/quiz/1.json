@@ -1,5 +1,6 @@
 {
   "name": "환영 페이지",
+  "category": "1",
   "defaultUserHtml": "<h1>Hi</h1>",
   "defaultUserCss": "h1 { font-size: 2em; color: green; }",
   "answerHtml": "<h1>Hi</h1>",

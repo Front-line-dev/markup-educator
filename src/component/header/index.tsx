@@ -1,15 +1,21 @@
 import { useState } from 'react';
 import classnames from 'classnames';
-import Link from 'next/link';
 import styles from './header.module.scss';
 
 interface HeaderProps {
+  quizFileList?: QuizParams[];
   resetHandler: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-function Header({ resetHandler }: HeaderProps) {
+interface QuizParams {
+  id: string;
+  category: string;
+}
+
+function Header({ quizFileList, resetHandler }: HeaderProps) {
   const [quizListOpened, setQuizListOpened] = useState(false);
   const [copySuccessPopupVisible, setCopySuccessPopupVisible] = useState(false);
+
   function toggleQuizListOpened() {
     document.body.classList.toggle('modal_opened', !quizListOpened);
     setQuizListOpened(!quizListOpened);
@@ -52,38 +58,40 @@ function Header({ resetHandler }: HeaderProps) {
                 <em className={styles.quiz_level}>초급</em>
                 {/* 문제 수 받아서 처리 */}
                 <ul className={styles.list_quiz}>
-                  <li className={styles.item_quiz}>
-                    <Link href="./quiz/1" className={styles.link_quiz}>
-                      # Quiz 01
-                    </Link>
-                  </li>
-                  <li className={styles.item_quiz}>
-                    <Link href="./quiz/2" className={styles.link_quiz}>
-                      # Quiz 02
-                    </Link>
-                  </li>
+                  {quizFileList && quizFileList.map((item) => (
+                    item.category === '1' && (
+                      <li className={styles.item_quiz} key={item.id}>
+                        <a href={`./${item.id}`} className={styles.link_quiz}>
+                          # Quiz {item.id}
+                        </a>
+                      </li>)
+                  ))}
                 </ul>
               </div>
               <div className={styles.quiz_box}>
                 <em className={styles.quiz_level}>중급</em>
-                {/* 문제 수 받아서 처리 */}
                 <ul className={styles.list_quiz}>
-                  <li className={styles.item_quiz}>
-                    <Link href="./" className={styles.link_quiz}>
-                      # Quiz 01
-                    </Link>
-                  </li>
+                  {quizFileList && quizFileList.map((item) => (
+                    item.category === '2' && (
+                      <li className={styles.item_quiz} key={item.id}>
+                        <a href={`./${item.id}`} className={styles.link_quiz}>
+                          # Quiz {item.id}
+                        </a>
+                      </li>)
+                  ))}
                 </ul>
               </div>
               <div className={styles.quiz_box}>
                 <em className={styles.quiz_level}>고급</em>
-                {/* 문제 수 받아서 처리 */}
                 <ul className={styles.list_quiz}>
-                  <li className={styles.item_quiz}>
-                    <Link href="./" className={styles.link_quiz}>
-                      # Quiz 01
-                    </Link>
-                  </li>
+                  {quizFileList && quizFileList.map((item) => (
+                    item.category === '3' && (
+                      <li className={styles.item_quiz} key={item.id}>
+                        <a href={`./${item.id}`} className={styles.link_quiz}>
+                          # Quiz {item.id}
+                        </a>
+                      </li>)
+                  ))}
                 </ul>
               </div>
             </div>
