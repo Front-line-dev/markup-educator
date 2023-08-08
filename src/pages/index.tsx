@@ -10,7 +10,7 @@ const htmlDefaultState = `<div class="text">\n\tHello World\n</div>`;
 const cssDefaultState = `.text {\n\tcolor: #fff;\n}`;
 
 interface QuizlistProps {
-  quizFileList: QuizParams[]
+  quizFileList: QuizParams[];
 }
 
 interface QuizParams {
@@ -27,9 +27,7 @@ export default function Index({ quizFileList }: QuizlistProps) {
   const [quizlist, setQuizList] = useState([]);
   useEffect(() => {
     const quizfilelist = [...quizFileList];
-    quizfilelist.sort((a, b) => (
-      a.id < b.id ? -1 : 1)
-    )
+    quizfilelist.sort((a, b) => (a.id < b.id ? -1 : 1));
     setQuizList(quizfilelist);
   }, [quizFileList]);
 
@@ -47,6 +45,7 @@ export default function Index({ quizFileList }: QuizlistProps) {
             handleActivate={setActiveCodeTab}
             handleHtml={setHtmlState}
             handleCss={setCssState}
+            editable
           />
           <QuizView
             wrapperClass={styles.quiz}
@@ -69,41 +68,50 @@ export default function Index({ quizFileList }: QuizlistProps) {
           <em className={styles.quiz_level}>초급</em>
           {/* 문제 수 받아서 처리 */}
           <ul className={styles.list_quiz}>
-            {quizlist && quizlist.map((item) => (
-              item.category === '1' && (
-                <li className={styles.item_quiz} key={item.id}>
-                  <Link href={`./quiz/${item.id}`} className={styles.link_quiz}>
-                    # Quiz {item.id} {item.name}
-                  </Link>
-                </li>)
-            ))}
+            {quizlist &&
+              quizlist.map(
+                (item) =>
+                  item.category === '1' && (
+                    <li className={styles.item_quiz} key={item.id}>
+                      <Link href={`./quiz/${item.id}`} className={styles.link_quiz}>
+                        # Quiz {item.id} {item.name}
+                      </Link>
+                    </li>
+                  )
+              )}
           </ul>
         </div>
         <div className={styles.quiz_box}>
           <em className={styles.quiz_level}>중급</em>
           {/* 문제 수 받아서 처리 */}
           <ul className={styles.list_quiz}>
-            {quizlist && quizlist.map((item) => (
-              item.category === '2' && (
-                <li className={styles.item_quiz} key={item.id}>
-                  <Link href={`./quiz/${item.id}`} className={styles.link_quiz}>
-                    # Quiz {item.id} {item.name}
-                  </Link>
-                </li>)
-            ))}
+            {quizlist &&
+              quizlist.map(
+                (item) =>
+                  item.category === '2' && (
+                    <li className={styles.item_quiz} key={item.id}>
+                      <Link href={`./quiz/${item.id}`} className={styles.link_quiz}>
+                        # Quiz {item.id} {item.name}
+                      </Link>
+                    </li>
+                  )
+              )}
           </ul>
         </div>
         <div className={styles.quiz_box}>
           <em className={styles.quiz_level}>고급</em>
           <ul className={styles.list_quiz}>
-            {quizlist && quizlist.map((item) => (
-              item.category === '3' && (
-                <li className={styles.item_quiz} key={item.id}>
-                  <Link href={`./quiz/${item.id}`} className={styles.link_quiz}>
-                    # Quiz {item.id} {item.name}
-                  </Link>
-                </li>)
-            ))}
+            {quizlist &&
+              quizlist.map(
+                (item) =>
+                  item.category === '3' && (
+                    <li className={styles.item_quiz} key={item.id}>
+                      <Link href={`./quiz/${item.id}`} className={styles.link_quiz}>
+                        # Quiz {item.id} {item.name}
+                      </Link>
+                    </li>
+                  )
+              )}
           </ul>
         </div>
       </main>
@@ -115,7 +123,7 @@ export async function getStaticProps() {
   const quizFileList = readQuizFileList(true);
   return {
     props: {
-      quizFileList
+      quizFileList,
     },
-  }
+  };
 }

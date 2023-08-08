@@ -4,6 +4,7 @@ export interface Markup {
   id: string;
   htmlState: string;
   cssState: string;
+  quizClearedState: boolean;
 }
 
 export class MySubClassedDexie extends Dexie {

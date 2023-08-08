@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { readQuizFileList, readQuizFileById } from '@lib/quiz/readFiles';
-import { useLiveQuery } from 'dexie-react-hooks';
+import Confetti from 'react-confetti';
 import { db } from '@model/db';
 import Header from '@component/header';
 import QuizEditor from '@component/quiz/QuizEditor';
@@ -35,41 +35,57 @@ export default function Quiz({ quizFileList, id, name, category, defaultUserHtml
   const [score, setScore] = useState(0);
   const [comparing, setComparing] = useState(false);
   const [iframeListenerReady, setIframeListenerReady] = useState(false);
-  const [showAnswer, setShowAnswer] = useState(false);
   const [quizlist, setQuizList] = useState([]);
+  const [quizCleared, setQuizCleared] = useState(false);
+  const [clearAnimationState, setClearAnimationState] = useState(false);
+  const [userIframe, setUserIframe] = useState<Window>(null);
+  const [answerIframe, setAnswerIframe] = useState<Window>(null);
 
-  // db에서 코드 불러오기
-  const dataBaseItem = useLiveQuery(() => db.markups.where('id').equals(id).toArray())?.shift();
-  if (dataBaseItem) {
-    setUserHtml(dataBaseItem.htmlState);
-    setUserCss(dataBaseItem.cssState);
-  }
+  useEffect(() => {
+    async function loadIndexedDB() {
+      const savedState = await db.markups.get(id);
+      if (savedState) {
+        const { cssState, htmlState, quizClearedState } = await db.markups.get(id);
+        setUserHtml(htmlState);
+        setUserCss(cssState);
+        setQuizCleared(quizClearedState);
+      }
+    }
+
+    loadIndexedDB();
+  }, [id]);
 
   useEffect(() => {
     const quizfilelist = [...quizFileList];
-    quizfilelist.sort((a, b) => (
-      a.id < b.id ? -1 : 1)
-    )
+    quizfilelist.sort((a, b) => (a.id < b.id ? -1 : 1));
     setQuizList(quizfilelist);
   }, [quizFileList]);
 
   useEffect(() => {
-    const iframeMap = { user: null, answer: null };
     // 아이프레임 이벤트 리스너 등록
     async function handleIframeMessage(event) {
       if (event?.source?.location?.pathname === 'srcdoc') {
         // 이벤트가 발생될 때마다 아이프레임 요소 업데이트
-        iframeMap[event.source.frameElement.dataset.type] = event.source;
+        const iframeType = event.source.frameElement.dataset.type;
+        if (iframeType === 'user') {
+          setUserIframe(event.source);
+        } else if (iframeType === 'answer') {
+          setAnswerIframe(event.source);
+        }
         // 요소에 접근해서 스코어 계산
-        if (iframeMap.user && iframeMap.answer) {
+        if (userIframe && answerIframe) {
           setComparing(true);
-          const currentScore = await compareMarkup(iframeMap.user, iframeMap.answer);
+          const currentScore = await compareMarkup(userIframe, answerIframe);
           setScore(currentScore);
           setComparing(false);
 
-          // 정답일 경우 정답코드 보여줌
-          if (currentScore === 1) {
-            setShowAnswer(true);
+          // 처음으로 정답을 맞혔을 경우
+          if (currentScore === 1 && quizCleared === false) {
+            setQuizCleared(true);
+            setClearAnimationState(true);
+            setTimeout(() => {
+              setClearAnimationState(false);
+            }, 5000);
           }
         }
       }
@@ -83,16 +99,16 @@ export default function Quiz({ quizFileList, id, name, category, defaultUserHtml
       // 아이프레임 이벤트 리스너 제거
       window.removeEventListener('message', handleIframeMessage);
     };
-  }, []);
+  }, [userIframe, answerIframe, quizCleared]);
 
   useEffect(() => {
     // db에 코드 저장
     try {
-      db.markups.put({ id, htmlState: userHtml, cssState: userCss }, id);
+      db.markups.put({ id, htmlState: userHtml, cssState: userCss, quizClearedState: quizCleared }, id);
     } catch (error) {
       console.error(error);
     }
-  }, [userHtml, userCss, id]);
+  }, [userHtml, userCss, id, quizCleared]);
 
   function resetHandler() {
     setUserHtml(defaultUserHtml);
@@ -101,6 +117,7 @@ export default function Quiz({ quizFileList, id, name, category, defaultUserHtml
 
   return (
     <div className={styles.wrap}>
+      {clearAnimationState && <Confetti width={document.body.clientWidth - 50} height={document.body.clientHeight} recycle={false} />}
       <Header resetHandler={resetHandler} quizFileList={quizlist} />
       <main className={styles.main}>
         <div className={styles.name}>{name}</div>
@@ -125,8 +142,8 @@ export default function Quiz({ quizFileList, id, name, category, defaultUserHtml
           handleActivate={setActiveUserViewTab}
           iframeListenerReady={iframeListenerReady}
         />
-        <QuizResult wrapperClassName={styles.grade} score={score} debouncing={debouncing} comparing={comparing} />
-        {showAnswer && (
+        <QuizResult wrapperClassName={styles.grade} score={score} debouncing={debouncing} comparing={comparing} quizCleared={quizCleared} />
+        {quizCleared && (
           <>
             <strong className={styles.answer_title}>Answer Code</strong>
             <QuizEditor
@@ -159,6 +176,6 @@ export async function getStaticProps({ params }) {
   const quizFileData = readQuizFileById(params.id);
   const quizFileList = readQuizFileList(true);
   return {
-    props: { quizFileList, id: params.id, ...quizFileData }
+    props: { quizFileList, id: params.id, ...quizFileData },
   };
 }
