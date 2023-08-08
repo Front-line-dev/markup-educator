@@ -16,6 +16,7 @@ interface QuizlistProps {
 interface QuizParams {
   id: string;
   category: string;
+  name: string;
 }
 
 export default function Index({ quizFileList }: QuizlistProps) {
@@ -72,7 +73,7 @@ export default function Index({ quizFileList }: QuizlistProps) {
               item.category === '1' && (
                 <li className={styles.item_quiz} key={item.id}>
                   <Link href={`./quiz/${item.id}`} className={styles.link_quiz}>
-                    # Quiz {item.id}
+                    # Quiz {item.id} {item.name}
                   </Link>
                 </li>)
             ))}
@@ -86,7 +87,7 @@ export default function Index({ quizFileList }: QuizlistProps) {
               item.category === '2' && (
                 <li className={styles.item_quiz} key={item.id}>
                   <Link href={`./quiz/${item.id}`} className={styles.link_quiz}>
-                    # Quiz {item.id}
+                    # Quiz {item.id} {item.name}
                   </Link>
                 </li>)
             ))}
@@ -99,7 +100,7 @@ export default function Index({ quizFileList }: QuizlistProps) {
               item.category === '3' && (
                 <li className={styles.item_quiz} key={item.id}>
                   <Link href={`./quiz/${item.id}`} className={styles.link_quiz}>
-                    # Quiz {item.id}
+                    # Quiz {item.id} {item.name}
                   </Link>
                 </li>)
             ))}

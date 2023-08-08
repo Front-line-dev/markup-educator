@@ -10,6 +10,7 @@ interface HeaderProps {
 interface QuizParams {
   id: string;
   category: string;
+  name: string;
 }
 
 function Header({ quizFileList, resetHandler }: HeaderProps) {
@@ -62,7 +63,7 @@ function Header({ quizFileList, resetHandler }: HeaderProps) {
                     item.category === '1' && (
                       <li className={styles.item_quiz} key={item.id}>
                         <a href={`./${item.id}`} className={styles.link_quiz}>
-                          # Quiz {item.id}
+                          # Quiz {item.id} {item.name}
                         </a>
                       </li>)
                   ))}
@@ -75,7 +76,7 @@ function Header({ quizFileList, resetHandler }: HeaderProps) {
                     item.category === '2' && (
                       <li className={styles.item_quiz} key={item.id}>
                         <a href={`./${item.id}`} className={styles.link_quiz}>
-                          # Quiz {item.id}
+                          # Quiz {item.id} {item.name}
                         </a>
                       </li>)
                   ))}
@@ -88,7 +89,7 @@ function Header({ quizFileList, resetHandler }: HeaderProps) {
                     item.category === '3' && (
                       <li className={styles.item_quiz} key={item.id}>
                         <a href={`./${item.id}`} className={styles.link_quiz}>
-                          # Quiz {item.id}
+                          # Quiz {item.id} {item.name}
                         </a>
                       </li>)
                   ))}
