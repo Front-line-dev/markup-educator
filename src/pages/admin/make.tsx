@@ -75,13 +75,13 @@ export default function Make() {
       <main className={styles.main}>
         <h2>USER HTML / CSS</h2>
         <div className={styles.editor_wrap}>
-          <Editor lang="html" initialString={userHtml} setString={setUserHtml} setDebouncing={setDebouncing} />
-          <Editor lang="css" initialString={userCss} setString={setUserCss} setDebouncing={setDebouncing} />
+          <Editor lang="html" initialString={userHtml} setString={setUserHtml} setDebouncing={setDebouncing} editable />
+          <Editor lang="css" initialString={userCss} setString={setUserCss} setDebouncing={setDebouncing} editable />
         </div>
         <h2>ANSWER HTML / CSS</h2>
         <div className={styles.editor_wrap}>
-          <Editor lang="html" initialString={answerHtml} setString={setAnswerHtml} setDebouncing={setDebouncing} />
-          <Editor lang="css" initialString={answerCss} setString={setAnswerCss} setDebouncing={setDebouncing} />
+          <Editor lang="html" initialString={answerHtml} setString={setAnswerHtml} setDebouncing={setDebouncing} editable />
+          <Editor lang="css" initialString={answerCss} setString={setAnswerCss} setDebouncing={setDebouncing} editable />
         </div>
         <div className={classnames(styles.canvas_row, styles.tablet)}>
           <div className={styles.canvas_wrap}>

@@ -110,10 +110,10 @@ export default function Quiz({ quizFileList, id, name, category, defaultUserHtml
     }
   }, [userHtml, userCss, id, quizCleared]);
 
-  function resetHandler() {
+  const resetHandler = () => {
     setUserHtml(defaultUserHtml);
     setUserCss(defaultUserCss);
-  }
+  };
 
   return (
     <div className={styles.wrap}>

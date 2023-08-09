@@ -28,6 +28,7 @@ function Header({ quizFileList, resetHandler }: HeaderProps) {
       setCopySuccessPopupVisible(false);
     }, 3400);
   }
+
   return (
     <header className={styles.container}>
       <h1 className={styles.title}>
@@ -47,7 +48,7 @@ function Header({ quizFileList, resetHandler }: HeaderProps) {
         </button>
         {quizListOpened && (
           <div className={styles.overlay}>
-            <div className={styles.dimmed} onClick={toggleQuizListOpened} />
+            <div className={styles.dimmed} onClick={toggleQuizListOpened} aria-hidden="true" />
             <div className={styles.quiz_list_area}>
               <div className={styles.quiz_list_header}>
                 <strong className={styles.title}>퀴즈 리스트</strong>
@@ -59,40 +60,49 @@ function Header({ quizFileList, resetHandler }: HeaderProps) {
                 <em className={styles.quiz_level}>초급</em>
                 {/* 문제 수 받아서 처리 */}
                 <ul className={styles.list_quiz}>
-                  {quizFileList && quizFileList.map((item) => (
-                    item.category === '1' && (
-                      <li className={styles.item_quiz} key={item.id}>
-                        <a href={`./${item.id}`} className={styles.link_quiz}>
-                          # Quiz {item.id} {item.name}
-                        </a>
-                      </li>)
-                  ))}
+                  {quizFileList &&
+                    quizFileList.map(
+                      (item) =>
+                        item.category === '1' && (
+                          <li className={styles.item_quiz} key={item.id}>
+                            <a href={`./${item.id}`} className={styles.link_quiz}>
+                              # Quiz {item.id} {item.name}
+                            </a>
+                          </li>
+                        )
+                    )}
                 </ul>
               </div>
               <div className={styles.quiz_box}>
                 <em className={styles.quiz_level}>중급</em>
                 <ul className={styles.list_quiz}>
-                  {quizFileList && quizFileList.map((item) => (
-                    item.category === '2' && (
-                      <li className={styles.item_quiz} key={item.id}>
-                        <a href={`./${item.id}`} className={styles.link_quiz}>
-                          # Quiz {item.id} {item.name}
-                        </a>
-                      </li>)
-                  ))}
+                  {quizFileList &&
+                    quizFileList.map(
+                      (item) =>
+                        item.category === '2' && (
+                          <li className={styles.item_quiz} key={item.id}>
+                            <a href={`./${item.id}`} className={styles.link_quiz}>
+                              # Quiz {item.id} {item.name}
+                            </a>
+                          </li>
+                        )
+                    )}
                 </ul>
               </div>
               <div className={styles.quiz_box}>
                 <em className={styles.quiz_level}>고급</em>
                 <ul className={styles.list_quiz}>
-                  {quizFileList && quizFileList.map((item) => (
-                    item.category === '3' && (
-                      <li className={styles.item_quiz} key={item.id}>
-                        <a href={`./${item.id}`} className={styles.link_quiz}>
-                          # Quiz {item.id} {item.name}
-                        </a>
-                      </li>)
-                  ))}
+                  {quizFileList &&
+                    quizFileList.map(
+                      (item) =>
+                        item.category === '3' && (
+                          <li className={styles.item_quiz} key={item.id}>
+                            <a href={`./${item.id}`} className={styles.link_quiz}>
+                              # Quiz {item.id} {item.name}
+                            </a>
+                          </li>
+                        )
+                    )}
                 </ul>
               </div>
             </div>
