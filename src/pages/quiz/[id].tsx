@@ -45,7 +45,7 @@ export default function Quiz({ quizFileList, id, name, category, defaultUserHtml
     async function loadIndexedDB() {
       const savedState = await db.markups.get(id);
       if (savedState) {
-        const { cssState, htmlState, quizClearedState } = await db.markups.get(id);
+        const { cssState, htmlState, quizClearedState } = savedState;
         setUserHtml(htmlState);
         setUserCss(cssState);
         setQuizCleared(quizClearedState);
