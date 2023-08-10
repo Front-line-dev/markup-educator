@@ -32,36 +32,38 @@ function Header({ quizList, resetHandler }: HeaderProps) {
 
   return (
     <header className={styles.container}>
-      <h1 className={styles.title}>
-        <a className={styles.home_link} href="#!">
-          Can you markup?
-        </a>
-      </h1>
-      <div className={styles.button_area}>
-        <button type="button" className={classnames(styles.top_button, styles.reset_button)} onClick={resetHandler}>
-          <span className="blind">코드 초기화</span>
-        </button>
-        <button type="button" className={classnames(styles.top_button, styles.share_button)} onClick={copyUrlButtonHandler}>
-          <span className="blind">공유</span>
-        </button>
-        <button type="button" onClick={toggleQuizListOpened} className={classnames(styles.top_button, styles.quiz_button)}>
-          <span className="blind">퀴즈목록</span>
-        </button>
-        {quizListOpened && (
-          <div className={styles.overlay}>
-            <div className={styles.dimmed} onClick={toggleQuizListOpened} aria-hidden="true" />
-            <div className={styles.quiz_list_area}>
-              <div className={styles.quiz_list_header}>
-                <strong className={styles.title}>퀴즈 리스트</strong>
-                <button type="button" className={styles.close_button} onClick={toggleQuizListOpened}>
-                  <span className="blind">닫기</span>
-                </button>
+      <div className={styles.inner}>
+        <h1 className={styles.title}>
+          <a className={styles.home_link} href="#!">
+            Can you markup?
+          </a>
+        </h1>
+        <div className={styles.button_area}>
+          <button type="button" className={classnames(styles.top_button, styles.reset_button)} onClick={resetHandler}>
+            <span className="blind">코드 초기화</span>
+          </button>
+          <button type="button" className={classnames(styles.top_button, styles.share_button)} onClick={copyUrlButtonHandler}>
+            <span className="blind">공유</span>
+          </button>
+          <button type="button" onClick={toggleQuizListOpened} className={classnames(styles.top_button, styles.quiz_button)}>
+            <span className="blind">퀴즈목록</span>
+          </button>
+          {quizListOpened && (
+            <div className={styles.overlay}>
+              <div className={styles.dimmed} onClick={toggleQuizListOpened} aria-hidden="true" />
+              <div className={styles.quiz_list_area}>
+                <div className={styles.quiz_list_header}>
+                  <strong className={styles.title}>퀴즈 리스트</strong>
+                  <button type="button" className={styles.close_button} onClick={toggleQuizListOpened}>
+                    <span className="blind">닫기</span>
+                  </button>
+                </div>
+                <QuizList quizList={quizList} />
               </div>
-              <QuizList quizList={quizList} />
             </div>
-          </div>
-        )}
-        {copySuccessPopupVisible && <p className={styles.copy_popup_text}>복사 되었습니다</p>}
+          )}
+          {copySuccessPopupVisible && <p className={styles.copy_popup_text}>복사 되었습니다</p>}
+        </div>
       </div>
     </header>
   );

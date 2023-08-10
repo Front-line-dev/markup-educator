@@ -113,7 +113,7 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
       {clearAnimationState && <Confetti width={document.body.clientWidth - 50} height={document.body.clientHeight} recycle={false} />}
       <Header resetHandler={resetHandler} quizList={quizList} />
       <main className={styles.main}>
-        <div className={styles.name}>{name}</div>
+        <h2 className={styles.name}>{`# Quiz ${id} < ${name} >`}</h2>
         <QuizEditor
           wrapperClass={styles.editor}
           activate={activeHtmlStateTab}

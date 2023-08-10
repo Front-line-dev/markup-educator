@@ -1,20 +1,27 @@
 .container {
-  display: flex;
-  align-items: center;
   width: 100%;
-  max-width: 970px;
   padding: 0 20px;
   box-sizing: border-box;
-  font-size: 18px;
   background-color: #19b3e6;
+}
+.inner {
+  display: flex;
+  align-items: center;
+  max-width: 970px;
+  margin: 0 auto;
   @include mediaQuery('pc_wide') {
-    max-width: 1600px;
+    max-width: 1500px;
   }
 }
 .title {
   font-size: 20px;
   line-height: 40px;
   color: #fff;
+
+  @include mediaQuery('pc_wide') {
+    font-size: 30px;
+    line-height: 60px;
+  }
 }
 .button_area {
   margin-left: auto;
