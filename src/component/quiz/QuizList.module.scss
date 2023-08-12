@@ -1,0 +1,12 @@
+.quiz_box {
+  margin: 20px 20px 0;
+  text-align: center;
+  color: #fff;
+  & + & {
+    padding-top: 20px;
+    border-top: 1px solid #fff;
+  }
+}
+.quiz_level {
+  font-size: 22px;
+}

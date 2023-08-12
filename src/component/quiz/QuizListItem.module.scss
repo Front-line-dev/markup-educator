@@ -1,0 +1,17 @@
+.list_quiz {
+  margin-top: 10px;
+}
+.item_quiz {
+  & + & {
+    margin-top: 5px;
+  }
+}
+.link_quiz {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 12px;
+  vertical-align: top;
+  &:hover {
+    background-color: rgba(#fff, 0.15);
+  }
+}

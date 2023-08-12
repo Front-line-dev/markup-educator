@@ -1,18 +1,18 @@
 import fs from 'fs';
+import path from 'path';
 
-export function readQuizFileList(haveCategory?: boolean) {
+export function readQuizFiles() {
   const fileNames = fs.readdirSync('src/quiz');
-  if (haveCategory)
-    return fileNames.map((fileName) => ({
-      id: Number(fileName.replace('.json', '')),
-      category: JSON.parse(fs.readFileSync(`src/quiz/${fileName}`, 'utf8')).category,
-      name: JSON.parse(fs.readFileSync(`src/quiz/${fileName}`, 'utf8')).name,
-    }));
-  return fileNames.map((fileName) => ({
-    params: {
-      id: fileName.replace('.json', ''),
-    },
-  }));
+  const files = fileNames.map((fileName) => {
+    const { category, name } = JSON.parse(fs.readFileSync(`src/quiz/${fileName}`, 'utf8'));
+    return {
+      id: path.parse(fileName).name,
+      category,
+      name,
+    };
+  });
+
+  return files;
 }
 
 export function readQuizFileById(index?: string) {

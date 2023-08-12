@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { readQuizFileList, readQuizFileById } from '@lib/quiz/readFiles';
+import { readQuizFiles, readQuizFileById } from '@lib/quiz/readFiles';
 import Confetti from 'react-confetti';
 import { db } from '@model/db';
 import Header from '@component/header';
@@ -10,7 +10,7 @@ import compareMarkup from '@lib/score/compare';
 import styles from './quiz.module.scss';
 
 interface QuizlistProps {
-  quizFileList: QuizParams[];
+  quizList: QuizParams[];
   id: string;
   name: string;
   category: string;
@@ -26,7 +26,7 @@ interface QuizParams {
   name: string;
 }
 
-export default function Quiz({ quizFileList, id, name, category, defaultUserHtml, defaultUserCss, answerHtml, answerCss }: QuizlistProps) {
+export default function Quiz({ quizList, id, name, category, defaultUserHtml, defaultUserCss, answerHtml, answerCss }: QuizlistProps) {
   const [userHtml, setUserHtml] = useState(defaultUserHtml);
   const [userCss, setUserCss] = useState(defaultUserCss);
   const [activeHtmlStateTab, setActiveCodeTab] = useState(true);
@@ -54,12 +54,6 @@ export default function Quiz({ quizFileList, id, name, category, defaultUserHtml
 
     loadIndexedDB();
   }, [id]);
-
-  useEffect(() => {
-    const quizfilelist = [...quizFileList];
-    quizfilelist.sort((a, b) => (a.id < b.id ? -1 : 1));
-    setQuizList(quizfilelist);
-  }, [quizFileList]);
 
   useEffect(() => {
     // 아이프레임 이벤트 리스너 등록
@@ -118,7 +112,7 @@ export default function Quiz({ quizFileList, id, name, category, defaultUserHtml
   return (
     <div className={styles.wrap}>
       {clearAnimationState && <Confetti width={document.body.clientWidth - 50} height={document.body.clientHeight} recycle={false} />}
-      <Header resetHandler={resetHandler} quizFileList={quizlist} />
+      <Header resetHandler={resetHandler} quizList={quizList} />
       <main className={styles.main}>
         <div className={styles.name}>{name}</div>
         <QuizEditor
@@ -165,17 +159,21 @@ export default function Quiz({ quizFileList, id, name, category, defaultUserHtml
 }
 
 export async function getStaticPaths() {
-  const paths = readQuizFileList();
+  const files = readQuizFiles();
   return {
-    paths,
+    paths: files.map((file) => ({
+      params: {
+        id: file.id,
+      },
+    })),
     fallback: false,
   };
 }
 
 export async function getStaticProps({ params }) {
   const quizFileData = readQuizFileById(params.id);
-  const quizFileList = readQuizFileList(true);
+  const files = readQuizFiles();
   return {
-    props: { quizFileList, id: params.id, ...quizFileData },
+    props: { quizList: files, id: params.id, ...quizFileData },
   };
 }
