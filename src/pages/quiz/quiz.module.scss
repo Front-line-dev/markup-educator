@@ -89,12 +89,14 @@
   }
 
   .grade {
-    flex-basis: 50%;
+    flex-basis: 0;
+    margin-left: 20px;
   }
 
   .view {
+    flex-basis: 0;
     order: 0;
-    max-width: 50%;
+    width: 50%;
     padding-top: 80px;
     box-sizing: border-box;
   }
