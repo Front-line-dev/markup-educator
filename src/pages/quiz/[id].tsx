@@ -35,7 +35,6 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
   const [score, setScore] = useState(0);
   const [comparing, setComparing] = useState(false);
   const [iframeListenerReady, setIframeListenerReady] = useState(false);
-  const [quizlist, setQuizList] = useState([]);
   const [quizCleared, setQuizCleared] = useState(false);
   const [clearAnimationState, setClearAnimationState] = useState(false);
   const [userIframe, setUserIframe] = useState<Window>(null);

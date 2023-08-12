@@ -13,13 +13,14 @@ interface QuizListPropsInner {
 }
 
 export default function QuizListItem({ quizList }: QuizListProps) {
+  console.log(quizList);
   return (
     <>
       {quizList && (
         <ul className={styles.list_quiz}>
           {quizList.map((quiz) => (
             <li className={styles.quiz_quiz} key={quiz.id}>
-              <Link href={`/quiz/${quiz.id}`} className={styles.link_quiz} prefetch={false}>
+              <Link href={`/quiz/${quiz.id}`} className={styles.link_quiz}>
                 # Quiz {quiz.id} {quiz.name}
               </Link>
             </li>
