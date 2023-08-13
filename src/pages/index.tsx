@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import classnames from 'classnames';
 import { readQuizFiles } from '@lib/quiz/readFiles';
 import Link from 'next/link';
