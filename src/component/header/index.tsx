@@ -35,7 +35,7 @@ function Header({ quizList, resetHandler }: HeaderProps) {
     <header className={styles.container}>
       <div className={styles.inner}>
         <h1 className={styles.title}>
-          <a className={styles.home_link} href={isProduct ? '/markup-educator' : '\\'}>
+          <a className={styles.home_link} href={isProduct ? '/markup-educator' : '/'}>
             Can you markup?
           </a>
         </h1>
