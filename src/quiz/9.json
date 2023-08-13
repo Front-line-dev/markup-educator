@@ -1,0 +1,8 @@
+{
+  "name": "border 속성 사용",
+  "category": "1",
+  "defaultUserHtml": "<div>\n  <button type=\"button\" class=\"button1\">\n   버튼 1\n  </button>\n  <button type=\"button\" class=\"button2\">\n   버튼 2\n  </button>\n  <button type=\"button\" class=\"button3\">\n   버튼 3\n  </button>\n  <button type=\"button\" class=\"button4\">\n   버튼 4\n  </button>\n  <button type=\"button\" class=\"button5\">\n   50%\n  </button>\n</div>",
+  "defaultUserCss": "div {\n  padding:10px 0;\n  text-align: center;\n  background-color: white;\n}\nbutton {\n  width: 70px;\n  height: 70px;\n}\n.button1 {\n  border: 3px green;\n}\n.button2 {\n  border: 3px green;\n}\n.button3 {\n  border: 3px green;\n}\n.button4 {\n}\n.button5 {\n  border: 3px green;\n  50%\n}",
+  "answerHtml": "<div>\n  <button type=\"button\" class=\"button1\">\n   버튼 1\n  </button>\n  <button type=\"button\" class=\"button2\">\n   버튼 2\n  </button>\n  <button type=\"button\" class=\"button3\">\n   버튼 3\n  </button>\n  <button type=\"button\" class=\"button4\">\n   버튼 4\n  </button>\n  <button type=\"button\" class=\"button5\">\n   50%\n  </button>\n</div>",
+  "answerCss": "div {\n  padding:10px 0;\n  text-align: center;\n  background-color: white;\n}\nbutton {\n  width: 70px;\n  height: 70px;\n}\n.button1 {\n  border: 3px solid green;\n}\n.button2 {\n  border: 3px dashed green;\n}\n.button3 {\n  border: 3px dotted green;\n}\n.button4 {\n  border: none;\n}\n.button5 {\n  border: 3px solid green;\n  border-radius: 50%;\n}"
+}
