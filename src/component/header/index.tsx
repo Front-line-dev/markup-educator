@@ -15,6 +15,7 @@ interface QuizParams {
 }
 
 function Header({ quizList, resetHandler }: HeaderProps) {
+  const isProduct = process.env.NODE_ENV === 'production';
   const [quizListOpened, setQuizListOpened] = useState(false);
   const [copySuccessPopupVisible, setCopySuccessPopupVisible] = useState(false);
 
@@ -34,7 +35,7 @@ function Header({ quizList, resetHandler }: HeaderProps) {
     <header className={styles.container}>
       <div className={styles.inner}>
         <h1 className={styles.title}>
-          <a className={styles.home_link} href="\">
+          <a className={styles.home_link} href={isProduct ? '/markup-educator' : '\\'}>
             Can you markup?
           </a>
         </h1>
