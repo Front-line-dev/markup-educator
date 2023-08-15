@@ -14,8 +14,9 @@
 }
 
 .name {
-  font-size: 20px;
-  line-height: 24px;
+  padding: 0 0 20px 5px;
+  font-size: 18px;
+  line-height: 22px;
   color: #fff;
 }
 
@@ -73,21 +74,30 @@
   }
 }
 
+@include mediaQuery('pc') {
+  .name {
+    font-size: 22px;
+    line-height: 26px;
+  }
+}
+
 @include mediaQuery('pc_wide') {
   .main {
     flex-wrap: wrap;
     max-width: none;
     width: 1500px;
-    padding-bottom: 0;
   }
 
   .grade {
-    flex-basis: 50%;
+    flex-basis: 0;
+    margin-left: 20px;
   }
 
   .view {
+    flex-basis: 0;
     order: 0;
-    flex-basis: 50%;
-    margin-top: 80px;
+    width: 50%;
+    padding-top: 80px;
+    box-sizing: border-box;
   }
 }

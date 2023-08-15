@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import classnames from 'classnames';
 import { readQuizFiles } from '@lib/quiz/readFiles';
 import Link from 'next/link';
@@ -29,8 +29,13 @@ export default function Index({ quizList }: QuizListProps) {
   return (
     <div className={styles.wrap}>
       <main className={styles.main}>
-        <h1 className={styles.title}>Can yoU Mark Up ?</h1>
-        <p className={styles.description}>화면을 똑같이 만들 수 있나요 ?</p>
+        <h1 className={styles.title}>Can yoU MarkUp ?</h1>
+        <p className={styles.description}>캔유마크업은 마크업 문제를 풀어보는 웹사이트입니다. html, css으로 동일한 화면을 만들어보아요.</p>
+        <div className={styles.start}>
+          <Link href="./quiz/1" className={classnames(styles.link_start, 'contrast')}>
+            시작하기
+          </Link>
+        </div>
         <div className={styles.box}>
           <QuizEditor
             wrapperClass={styles.quiz}
@@ -52,14 +57,11 @@ export default function Index({ quizList }: QuizListProps) {
             handleActivate={setActiveUserViewTab}
             iframeListenerReady
           />
-          <div className={styles.start}>
-            <Link href="./quiz/1" className={classnames(styles.link_start, 'contrast')}>
-              시작하기
-            </Link>
+          <div className={styles.quiz_section}>
+            <h2 className={styles.quiz_title}>퀴즈 목록</h2>
+            <QuizList quizList={quizList} />
           </div>
         </div>
-        <h2 className={styles.quiz_title}>퀴즈 목록</h2>
-        <QuizList quizList={quizList} />
       </main>
     </div>
   );
