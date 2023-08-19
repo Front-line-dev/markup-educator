@@ -42,7 +42,9 @@ export default function QuizResult({ wrapperClassName, score, debouncing, compar
       </p>
       {quizCleared &&
         (quizFinished ? (
-          <span className={classnames(styles.link, 'contrast')}>퀴즈 종료</span>
+          <Link href="/" role="button" className={classnames(styles.link, 'contrast')}>
+            홈으로 돌아가기
+          </Link>
         ) : (
           <Link href={`/quiz/${nextQuiz}`} role="button" className={classnames(styles.link, 'contrast')}>
             다음 문제로

@@ -65,7 +65,7 @@ function Header({ quizList, resetHandler }: HeaderProps) {
                     <span className="blind">닫기</span>
                   </button>
                 </div>
-                <QuizList quizList={quizList} key={router.asPath} />
+                <QuizList quizList={quizList} />
               </div>
             </div>
           )}
