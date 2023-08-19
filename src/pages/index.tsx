@@ -32,7 +32,7 @@ export default function Index({ quizList }: QuizListProps) {
         <h1 className={styles.title}>Can yoU MarkUp ?</h1>
         <p className={styles.description}>캔유마크업은 마크업 문제를 풀어보는 웹사이트입니다. html, css으로 동일한 화면을 만들어보아요.</p>
         <div className={styles.start}>
-          <Link href="./quiz/1" className={classnames(styles.link_start, 'contrast')}>
+          <Link href="/quiz/1" className={classnames(styles.link_start, 'contrast')}>
             시작하기
           </Link>
         </div>
