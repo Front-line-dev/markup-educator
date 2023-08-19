@@ -12,6 +12,8 @@ export function readQuizFiles() {
     };
   });
 
+  files.sort((a, b) => (Number(a.id) < Number(b.id) ? -1 : 1));
+
   return files;
 }
 

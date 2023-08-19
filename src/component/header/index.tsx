@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import classnames from 'classnames';
@@ -17,7 +17,6 @@ interface QuizParams {
 }
 
 function Header({ quizList, resetHandler }: HeaderProps) {
-  const isProduct = process.env.NODE_ENV === 'production';
   const router = useRouter();
   const [quizListOpened, setQuizListOpened] = useState(false);
   const [copySuccessPopupVisible, setCopySuccessPopupVisible] = useState(false);
@@ -33,6 +32,10 @@ function Header({ quizList, resetHandler }: HeaderProps) {
       setCopySuccessPopupVisible(false);
     }, 3400);
   }
+
+  useEffect(() => {
+    setQuizListOpened(false);
+  }, [router.asPath]);
 
   return (
     <header className={styles.container}>

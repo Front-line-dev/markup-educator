@@ -139,7 +139,7 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
           handleActivate={setActiveUserViewTab}
           iframeListenerReady={iframeListenerReady}
         />
-        <QuizResult wrapperClassName={styles.grade} score={score} debouncing={debouncing} comparing={comparing} quizCleared={quizCleared} />
+        <QuizResult wrapperClassName={styles.grade} score={score} debouncing={debouncing} comparing={comparing} quizCleared={quizCleared} quizList={quizList} />
         {quizCleared && (
           <>
             <strong className={styles.answer_title}>Answer Code</strong>

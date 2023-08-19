@@ -26,13 +26,11 @@ export default function QuizList({ quizList }: QuizListProps) {
       4: setExtraQuizList,
     };
 
-    quizList
-      .sort((a, b) => (Number(a.id) < Number(b.id) ? -1 : 1))
-      .forEach((quiz) => {
-        if (quiz.category) {
-          quizCategoryMap[quiz.category]((categoryQuizList) => [...categoryQuizList, quiz]);
-        }
-      });
+    quizList.forEach((quiz) => {
+      if (quiz.category) {
+        quizCategoryMap[quiz.category]((categoryQuizList) => [...categoryQuizList, quiz]);
+      }
+    });
   }, [quizList]);
 
   return (
