@@ -1,0 +1,8 @@
+{
+    "name": "마지막 아이템만 말줄임",
+    "category": "1",
+    "defaultUserHtml": "<main>\n  <ul>\n    <li>1번 아이템</li>\n    <li>2번 아이템</li>\n    <li>가로가 길 경우 마지막 아이템만 말 줄임</li>\n  </ul>\n</main>",
+    "defaultUserCss": "main {\n  color: #fff;\n}\n\nul {\n  padding: 5px 0;\n  border: 1px solid #fff;\n}\n\nli {\n  position: relative;\n  list-style: none;\n  padding: 0 10px;\n}\n\nli + li::before {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  width: 1px;\n  background-color: grey;\n  content: '';\n}",
+    "answerHtml": "<main>\n  <ul>\n    <li>1번 아이템</li>\n    <li>2번 아이템</li>\n    <li>가로가 길 경우 마지막 아이템만 말 줄임</li>\n  </ul>\n</main>",
+    "answerCss": "main {\n  color: #fff;\n}\n\nul {\n  display: flex;\n  padding: 5px 0;\n  border: 1px solid #fff;\n}\n\nli {\n  position: relative;\n  flex: 0 0 auto;\n  list-style: none;\n  padding: 0 10px;\n}\n\nli + li::before {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  width: 1px;\n  background-color: grey;\n  content: '';\n}\n\nli:last-of-type {\n  flex: 0 1 auto;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}"
+}
