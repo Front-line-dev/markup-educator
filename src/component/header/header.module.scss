@@ -61,6 +61,8 @@
   background-color: rgba(#000, 0.7);
 }
 .quiz_list_area {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 0;
   right: 0;
@@ -87,6 +89,7 @@
 }
 .quiz_list_header {
   position: relative;
+  flex: 0 0 auto;
 }
 .close_button {
   position: absolute;
@@ -101,6 +104,7 @@
   }
 }
 .quiz_box {
+  flex: 1 1 auto;
   margin: 20px 20px 0;
   text-align: center;
   color: #fff;
