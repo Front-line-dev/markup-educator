@@ -1,6 +1,6 @@
 {
   "name": "flex 활용",
-  "category": "1",
+  "category": "2",
   "defaultUserHtml": "<ol>\n  <li class=\"item\">\n    일\n  </li>\n  <li class=\"item\">\n    이\n  </li>\n  <li class=\"item\">\n    삼\n  </li>\n</ol>",
   "defaultUserCss": "ol {\n  margin: 0;\n  padding: 0;\n}\n.item {\n  list-style: none;\n  padding: 10px;\n  border: 2px solid #03c75a;\n  color: #000;\n  border-radius: 10px;\n  background-color: #fff;\n  + .item {\n    margin-right: 10px;\n  }\n}",
   "answerHtml": "<ol>\n  <li class=\"item\">\n    일\n  </li>\n  <li class=\"item\">\n    이\n  </li>\n  <li class=\"item\">\n    삼\n  </li>\n</ol>",
