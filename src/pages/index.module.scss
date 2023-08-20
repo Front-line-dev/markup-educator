@@ -68,6 +68,7 @@
   flex-direction: column;
   width: 100%;
   margin-top: 50px;
+  gap: 20px;
 }
 
 .quiz_view {
@@ -76,7 +77,6 @@
 
 .quiz_list_wrap {
   flex: 1 0 0px;
-  padding: 0 30px;
 }
 
 .quiz_list_title {
