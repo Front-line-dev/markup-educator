@@ -49,19 +49,21 @@ export default function Index({ quizList }: QuizListProps) {
             handleCss={setCssState}
             editable
           />
-          <QuizView
-            wrapperClass={styles.quiz}
-            activate={activeUserViewTab}
-            userHtml={htmlState}
-            userCss={cssState}
-            answerHtml={answerHtml}
-            answerCss={answerCss}
-            handleActivate={setActiveUserViewTab}
-            iframeListenerReady
-          />
-          <div className={styles.quiz_section}>
-            <h2 className={styles.quiz_title}>퀴즈 목록</h2>
-            <QuizList quizList={quizList} />
+          <div className={styles.view_quiz_list_wrap}>
+            <QuizView
+              wrapperClass={styles.quiz_view}
+              activate={activeUserViewTab}
+              userHtml={htmlState}
+              userCss={cssState}
+              answerHtml={answerHtml}
+              answerCss={answerCss}
+              handleActivate={setActiveUserViewTab}
+              iframeListenerReady
+            />
+            <div className={styles.quiz_list_wrap}>
+              <h2 className={styles.quiz_list_title}>퀴즈 목록</h2>
+              <QuizList quizList={quizList} />
+            </div>
           </div>
         </div>
       </main>
