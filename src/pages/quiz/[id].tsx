@@ -40,6 +40,7 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
   const [userIframe, setUserIframe] = useState<Window>(null);
   const [answerIframe, setAnswerIframe] = useState<Window>(null);
 
+  // init
   useEffect(() => {
     async function loadIndexedDB() {
       const savedState = await db.markups.get(id);
@@ -48,11 +49,14 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
         setUserHtml(htmlState);
         setUserCss(cssState);
         setQuizCleared(quizClearedState);
+      } else {
+        setUserHtml(defaultUserHtml);
+        setUserCss(defaultUserCss);
       }
     }
 
     loadIndexedDB();
-  }, [id]);
+  }, [id, defaultUserHtml, defaultUserCss]);
 
   useEffect(() => {
     // 아이프레임 이벤트 리스너 등록
@@ -135,7 +139,7 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
           handleActivate={setActiveUserViewTab}
           iframeListenerReady={iframeListenerReady}
         />
-        <QuizResult wrapperClassName={styles.grade} score={score} debouncing={debouncing} comparing={comparing} quizCleared={quizCleared} />
+        <QuizResult wrapperClassName={styles.grade} score={score} debouncing={debouncing} comparing={comparing} quizCleared={quizCleared} quizList={quizList} />
         {quizCleared && (
           <>
             <strong className={styles.answer_title}>Answer Code</strong>

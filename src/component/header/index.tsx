@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 import classnames from 'classnames';
 import QuizList from '@component/quiz/QuizList';
 import styles from './header.module.scss';
@@ -15,7 +17,7 @@ interface QuizParams {
 }
 
 function Header({ quizList, resetHandler }: HeaderProps) {
-  const isProduct = process.env.NODE_ENV === 'production';
+  const router = useRouter();
   const [quizListOpened, setQuizListOpened] = useState(false);
   const [copySuccessPopupVisible, setCopySuccessPopupVisible] = useState(false);
 
@@ -31,13 +33,17 @@ function Header({ quizList, resetHandler }: HeaderProps) {
     }, 3400);
   }
 
+  useEffect(() => {
+    setQuizListOpened(false);
+  }, [router.asPath]);
+
   return (
     <header className={styles.container}>
       <div className={styles.inner}>
         <h1 className={styles.title}>
-          <a className={styles.home_link} href={isProduct ? '/markup-educator' : '/'}>
+          <Link className={styles.home_link} href="/">
             Can you markup?
-          </a>
+          </Link>
         </h1>
         <div className={styles.button_area}>
           <button type="button" className={classnames(styles.top_button, styles.reset_button)} onClick={resetHandler}>
