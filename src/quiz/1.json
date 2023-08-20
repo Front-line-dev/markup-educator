@@ -1,6 +1,6 @@
 {
   "name": "에디터 연습",
-  "category": "",
+  "category": "1",
   "defaultUserHtml": "<div class=\"h1\">\n  Heading Tag : H1, Color: Green\n</div>\n<div class=\"h2\">\n  Heading Tag : H2, Color: Yellow, underline\n</div>\n<div class=\"box\">\n  width: 200px\n  <br>\n  height: 200px\n  <br>\n  padding: 20px\n  <br>\n  border: 1px solid skyblue\n  <br>\n  color: skyblue\n</div>\n",
   "defaultUserCss": ".h1 {\n  color: white;\n}\n.h2 {\n  color: white;\n}\n.box {\n  width: 250px;\n  height: 100px;\n  border: 1px solid red;\n  color: white;\n}",
   "answerHtml": "<h1 class=\"h1\">\n  Heading Tag : H1, Color: Green\n</h1>\n<h2 class=\"h2\">\n  Heading Tag : H2, Color: Yellow, underline\n</h2>\n<div class=\"box\">\n  width: 50px\n  <br>\n  height: 200px\n  <br>\n  padding: 200px\n  <br>\n  border: 1px solid skyblue\n  <br>\n  color: skyblud\n</div>\n",
