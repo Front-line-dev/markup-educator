@@ -7,8 +7,10 @@ import QuizView from '@component/quiz/QuizView';
 import QuizList from '@component/quiz/QuizList';
 import styles from './index.module.scss';
 
-const htmlDefaultState = `<div class="text">\n\tHello World\n</div>`;
-const cssDefaultState = `.text {\n\tcolor: #fff;\n}`;
+const htmlDefaultState = '<h1>Hello CUMU</h1>\n<p>Type <span class="yellow"></span></p>';
+const cssDefaultState = 'body {\n  color: white;\n}\n\n.yellow {\n\n}';
+const answerHtml = '<h1>Hello CUMU</h1>\n<p>Type <span class="yellow">start</span></p>';
+const answerCss = 'body {\n  color: white;\n}\n\n.yellow {\n  color: yellow;\n}';
 
 interface QuizListProps {
   quizList: QuizListPropsInner[];
@@ -52,8 +54,8 @@ export default function Index({ quizList }: QuizListProps) {
             activate={activeUserViewTab}
             userHtml={htmlState}
             userCss={cssState}
-            answerHtml=""
-            answerCss=""
+            answerHtml={answerHtml}
+            answerCss={answerCss}
             handleActivate={setActiveUserViewTab}
             iframeListenerReady
           />
