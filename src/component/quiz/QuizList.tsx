@@ -34,7 +34,7 @@ export default function QuizList({ quizList }: QuizListProps) {
   }, [quizList]);
 
   return (
-    <>
+    <div className={styles.quiz_box_wrap}>
       <div className={styles.quiz_box}>
         <em className={styles.quiz_level}>초급</em>
         <QuizListItem quizList={basicQuizList} />
@@ -47,6 +47,6 @@ export default function QuizList({ quizList }: QuizListProps) {
         <em className={styles.quiz_level}>고급</em>
         <QuizListItem quizList={expertQuizList} />
       </div>
-    </>
+    </div>
   );
 }

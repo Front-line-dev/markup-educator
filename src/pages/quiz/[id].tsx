@@ -116,8 +116,8 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
     <div className={styles.wrap}>
       {clearAnimationState && <Confetti width={document.body.clientWidth - 50} height={document.body.clientHeight} recycle={false} />}
       <Header resetHandler={resetHandler} quizList={quizList} />
-      <main className={styles.main}>
-        <h2 className={styles.name}>{`# Quiz ${id} < ${name} >`}</h2>
+      <main className={styles.main_wrap}>
+        <h2 className={styles.quiz_name}>{`# Quiz ${id} < ${name} >`}</h2>
         <QuizEditor
           wrapperClass={styles.editor}
           activate={activeHtmlStateTab}
@@ -129,17 +129,26 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
           handleDebouncing={setDebouncing}
           editable
         />
-        <QuizView
-          wrapperClass={styles.view}
-          activate={activeUserViewTab}
-          userHtml={userHtml}
-          userCss={userCss}
-          answerHtml={answerHtml}
-          answerCss={answerCss}
-          handleActivate={setActiveUserViewTab}
-          iframeListenerReady={iframeListenerReady}
-        />
-        <QuizResult wrapperClassName={styles.grade} score={score} debouncing={debouncing} comparing={comparing} quizCleared={quizCleared} quizList={quizList} />
+        <div className={styles.view_result_wrap}>
+          <QuizResult
+            wrapperClassName={styles.result}
+            score={score}
+            debouncing={debouncing}
+            comparing={comparing}
+            quizCleared={quizCleared}
+            quizList={quizList}
+          />
+          <QuizView
+            wrapperClass={styles.view}
+            activate={activeUserViewTab}
+            userHtml={userHtml}
+            userCss={userCss}
+            answerHtml={answerHtml}
+            answerCss={answerCss}
+            handleActivate={setActiveUserViewTab}
+            iframeListenerReady={iframeListenerReady}
+          />
+        </div>
         {quizCleared && (
           <>
             <strong className={styles.answer_title}>Answer Code</strong>

@@ -35,6 +35,7 @@ function Header({ quizList, resetHandler }: HeaderProps) {
 
   useEffect(() => {
     setQuizListOpened(false);
+    document.body.classList.remove('modal_opened');
   }, [router.asPath]);
 
   return (
