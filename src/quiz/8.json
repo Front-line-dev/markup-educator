@@ -1,8 +1,8 @@
 {
   "name": "font 속성 사용",
   "category": "1",
-  "defaultUserHtml": "<div class=\"underline\">\n  밑줄\n</div>\n<div class=\"bold\">\n 굵은 폰트 700\n</div>\n<div class=\"vertical-align\">\n  vertical-align\n  <span class=\"inline-block\">\n  정렬\n  </span>\n</div>",
-  "defaultUserCss": ".underline {\n  color: white;\n}\n.bold {\n  color: white;\n}\n.vertical-align {\n  line-height: 40px;\n  background-color: white;\n}\n.inline-block {\n  display: inline-block;\n  color: white;\n  background-color: green;\n  line-height: 20px;\n}",
-  "answerHtml": "<div class=\"underline\">\n  밑줄\n</div>\n<div  class=\"bold\">\n 굵은 폰트 700\n</div>\n<div class=\"vertical-align\">\n  vertical-align\n  <span class=\"inline-block\">\n  정렬\n  </span>\n</div>",
-  "answerCss": ".underline {\n  color: white;\n  text-decoration: underline;\n}\n.bold {\n  color: white;\n  font-weight: bold;\n}\n .vertical-align {\n line-height: 40px;\n background-color: white;\n}\n.inline-block {\n  display: inline-block;\n  vertical-align: top;\n  color: white;\n  background-color: green;\n  line-height: 20px;\n}"
+  "defaultUserHtml": "<div class=\"underline\">\n  밑줄\n</div>\n<div class=\"bold\">\n 굵은 폰트 700\n</div>",
+  "defaultUserCss": ".underline {\n  color: white;\n}\n.bold {\n  color: white;\n}",
+  "answerHtml": "<div class=\"underline\">\n  밑줄\n</div>\n<div  class=\"bold\">\n 굵은 폰트 700\n</div>",
+  "answerCss": ".underline {\n  color: white;\n  text-decoration: underline;\n}\n.bold {\n  color: white;\n  font-weight: bold;\n}"
 }
