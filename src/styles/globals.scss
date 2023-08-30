@@ -57,6 +57,7 @@ fieldset {
 html,
 body {
   height: 100%;
+  overflow: auto;
 }
 
 button {
@@ -77,10 +78,6 @@ button {
   width: 1px;
   height: 1px;
   margin: -1px;
-}
-// modal창이 열렸을 때 body에 적용되는 코드
-.modal_opened {
-  overflow: hidden;
 }
 
 .cm-editor .cm-content {
