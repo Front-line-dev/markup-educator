@@ -22,7 +22,6 @@ function Header({ quizList, resetHandler }: HeaderProps) {
   const [copySuccessPopupVisible, setCopySuccessPopupVisible] = useState(false);
 
   function toggleQuizListOpened() {
-    document.body.classList.toggle('modal_opened', !quizListOpened);
     setQuizListOpened(!quizListOpened);
   }
 
@@ -35,7 +34,6 @@ function Header({ quizList, resetHandler }: HeaderProps) {
 
   useEffect(() => {
     setQuizListOpened(false);
-    document.body.classList.remove('modal_opened');
   }, [router.asPath]);
 
   return (

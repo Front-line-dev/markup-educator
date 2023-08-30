@@ -52,6 +52,7 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
       } else {
         setUserHtml(defaultUserHtml);
         setUserCss(defaultUserCss);
+        setQuizCleared(false);
       }
     }
 
