@@ -1,8 +1,8 @@
 {
-  "name": "display 활용하기",
-  "category": "1",
-  "defaultUserHtml": "<div>\n div\n</div>\n<span>\n span\n</span>\n<div>\n div\n</div>",
-  "defaultUserCss": "div {\n  color: white;\n  background-color: green;\n}\nspan {\n  margin: 10px 0;\n padding: 5px 0;\n color: white;\n background-color: blue;\n}",
-  "answerHtml": "<div>\n div\n</div>\n<span>\n span\n</span>\n<div>\n div\n</div>",
-  "answerCss": "div {\n  color: white;\n background-color: green;\n}\nspan {\n display:inline-block;\n margin: 10px 0;\npadding: 5px 0;\ncolor: white;\nbackground-color: blue;\n}"
+    "name": "display 활용하기",
+    "category": "1",
+    "defaultUserHtml": "<div>\n div\n</div>\n<span>\n span\n</span>\n<div>\n div\n</div>",
+    "defaultUserCss": "div {\n  color: white;\n  background-color: green;\n}\n\nspan {\n  margin: 10px 0;\n  padding: 5px 0;\n  color: white;\n  background-color: blue;\n}",
+    "answerHtml": "<div>\n div\n</div>\n<span>\n span\n</span>\n<div>\n div\n</div>",
+    "answerCss": "div {\n  color: white;\n  background-color: green;\n}\n\nspan {\n  display:inline-block;\n  margin: 10px 0;\n  padding: 5px 0;\n  color: white;\n  background-color: blue;\n}"
 }

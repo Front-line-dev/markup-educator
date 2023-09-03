@@ -1,5 +1,5 @@
 {
-    "name": "news",
+    "name": "float 사용",
     "category": "2",
     "defaultUserHtml": "<main>\n  <p>\n    <img src=\"../assets/thumbnail.jpg\" width=\"50\" height=\"50\">\n    <img src=\"../assets/thumbnail.jpg\" width=\"50\" height=\"210\">\n    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit.\n      Sed, hic error non quia explicabo asperiores ullam ex deleniti quasi eligendi.\n      Doloremque quia aspernatur eligendi hic,\n    </span>\n  </p>\n</main>\n<footer>\n  This is Footer\n</footer>",
     "defaultUserCss": "main {\n  border: 1px solid white;\n  padding: 0.5em;\n  color: white;\n}\n\np {\n  margin: 0;\n}\n\np img:first-of-type {\n  margin-right: 0.5em;\n}\n\np img:last-of-type {\n  margin-left: 0.5em;\n}\n\nfooter {\n  margin-top: 0.5em;\n  background-color: lightgreen;\n  text-align: center;\n  line-height: 2em;\n}",
