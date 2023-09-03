@@ -1,8 +1,8 @@
 {
-  "name": "flex 활용",
-  "category": "2",
-  "defaultUserHtml": "<ol>\n  <li />\n  <li />\n  <li />\n</ol>",
-  "defaultUserCss": "ol {\n  margin: 0;\n  padding: 0;\n}\nli {\n  list-style: none;\n  padding: 10px;\n  border: 2px solid #03c75a;\n  color: #000;\n  border-radius: 10px;\n  background-color: #fff;\n  counter-increment: section;\n  + li {\n    margin-right: 10px;\n  }\n  &::before {\n    content: counter(section)\n  }\n}",
-  "answerHtml": "<ol>\n  <li />\n  <li />\n  <li />\n</ol>",
-  "answerCss": "ol {\n  margin: 0;\n  padding: 0;\n  display: flex;\n  flex-direction: row-reverse;\n  justify-content: left;\n}\nli {\n  list-style: none;\n  position: relative;\n  padding: 10px;\n  border: 2px solid #03c75a;\n  color: #000;\n  border-radius: 10px;\n  background-color: #fff;\n  counter-increment: section;\n  + li {\n    margin-right: 10px;\n  }\n  &::before {\n    content: counter(section)\n  }\n}"
+    "name": "display 활용하기",
+    "category": "1",
+    "defaultUserHtml": "<div>\n div\n</div>\n<span>\n span\n</span>\n<div>\n div\n</div>",
+    "defaultUserCss": "div {\n  color: white;\n  background-color: green;\n}\n\nspan {\n  margin: 10px 0;\n  padding: 5px 0;\n  color: white;\n  background-color: blue;\n}",
+    "answerHtml": "<div>\n div\n</div>\n<span>\n span\n</span>\n<div>\n div\n</div>",
+    "answerCss": "div {\n  color: white;\n  background-color: green;\n}\n\nspan {\n  display:inline-block;\n  margin: 10px 0;\n  padding: 5px 0;\n  color: white;\n  background-color: blue;\n}"
 }

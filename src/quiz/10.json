@@ -1,8 +1,8 @@
 {
-    "name": "반투명 필터",
-    "category": "3",
-    "defaultUserHtml": "<main>\n  <div class=\"video_container\">\n    <img src=\"../assets/thumbnail.jpg\" >\n  </div>\n  <div class=\"overlay\">\n    <button type=\"button\" class=\"play_button\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"100\" viewBox=\"0 -960 960 960\" width=\"100\">\n        <path d=\"M320-203v-560l440 280-440 280Z\"/>\n      </svg>\n    </button>\n  </div>\n</main>",
-    "defaultUserCss": "main {\n  position: relative;\n}\n\n.video_container {\n}\n\n.video_container img {\n}\n\n.overlay {\n}\n\n.overlay .play_button {\n  width: 150px;\n  height: 150px;\n  background-color: rgba(255, 255, 255, 0.3);\n  /* blur 5px */\n}",
-    "answerHtml": "<main>\n  <div class=\"video_container\">\n    <img src=\"../assets/thumbnail.jpg\" >\n  </div>\n  <div class=\"overlay\">\n    <button type=\"button\" class=\"play_button\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"100\" viewBox=\"0 -960 960 960\" width=\"100\">\n        <path d=\"M320-203v-560l440 280-440 280Z\"/>\n      </svg>\n    </button>\n  </div>\n</main>",
-    "answerCss": "main {\n  position: relative;\n}\n\n.video_container {\n\n}\n\n.video_container img {\n  width: 100%;\n  vertical-align: top;\n}\n\n.overlay {\n  position: absolute;\n  inset: 0;\n}\n\n.overlay .play_button {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 150px;\n  height: 150px;\n  background-color: rgba(255, 255, 255, 0.3);\n  border: none;\n  border-radius: 50%;\n  backdrop-filter: blur(5px);\n}"
+  "name": "vw, vh",
+  "category": "2",
+  "defaultUserHtml": "<main>\n  <div class=\"center\"></div>\n  <div class=\"horizontal\"></div>\n  <div class=\"vertical\"></div>\n</main>",
+  "defaultUserCss": "body {\n  margin: 0;\n}\n\nmain {\n  position: relative;\n  width: 150px;\n  height: 150px;\n}\n\n.center {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 50px;\n  height: 50px;\n  background-color: green;\n}\n\n.horizontal {\n  height: 50px;\n  background-color: red;\n}\n\n.vertical {\n  width: 50px;\n  background-color: blue;\n}",
+  "answerHtml": "<main>\n  <div class=\"center\"></div>\n  <div class=\"horizontal\"></div>\n  <div class=\"vertical\"></div>\n</main>",
+  "answerCss": "body {\n  margin: 0;\n}\n\nmain {\n  position: relative;\n  width: 150px;\n  height: 150px;\n}\n\n.center {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 50px;\n  height: 50px;\n  background-color: green;\n}\n\n.horizontal {\n  position: absolute;\n  top: 100px;\n  left: 0;\n  width: 100vw;\n  height: 50px;\n  background-color: red;\n}\n\n.vertical {\n  position: absolute;\n  top: 0;\n  left: 100px;\n  width: 50px;\n  height: 100vh;\n  background-color: blue;\n}"
 }

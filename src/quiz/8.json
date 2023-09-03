@@ -1,8 +1,8 @@
 {
-    "name": "font 속성들",
+    "name": "checkbox 사용",
     "category": "1",
-    "defaultUserHtml": "<div class=\"underline\">\n  밑줄\n</div>\n<div class=\"bold\">\n 굵은 폰트 700\n</div>\n<div class=\"italic\">\n  이탤릭체\n</div>\n<div class=\"space\">\n  폰트사이 간격: -1px\n</div>",
-    "defaultUserCss": "div {\n  color: white\n}\n\n.underline {\n\n}\n\n.bold {\n\n}\n\n.italic {\n\n}\n\n.space {\n\n}",
-    "answerHtml": "<div class=\"underline\">\n  밑줄\n</div>\n<div class=\"bold\">\n 굵은 폰트 700\n</div>\n<div class=\"italic\">\n  이탤릭체\n</div>\n<div class=\"space\">\n  폰트사이 간격: -1px\n</div>",
-    "answerCss": "div {\n  color: white\n}\n\n.underline {\n  text-decoration: underline;\n}\n\n.bold {\n  font-weight: 700;\n}\n\n.italic {\n  font-style: italic;\n}\n\n.space {\n  letter-spacing: -1px;\n}"
+    "defaultUserHtml": "<div class=\"container\">\n  <div>\n    checkbox\n  </div>\n  <label>\n    <input type=\"checkbox\" checked class=\"checkbox\"/>\n    <div class=\"icon\"></div>\n    <div class=\"text\">checked color: lightblue</div>\n  </label>\n  <label>\n    <input type=\"checkbox\" class=\"checkbox\"/>\n    <div class=\"icon\"></div>\n    <div class=\"text\">check2</div>\n  </label>\n</div>",
+    "defaultUserCss": ".container {\n  padding: 20px;\n  text-align: center;\n  background-color: white;\n}\nlabel {\n  display: flex;\n  align-items: center;\n  + label {\n    margin-top: 10px;\n  }\n}\n.icon {\n  width: 30px;\n  height: 30px;\n  border: 1px solid gray;\n  border-radius: 8px;\n}\n.checkbox {\n  position: absolute;\n  overflow: hidden;\n  clip: rect(0 0 0 0);\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n}\n.text {\n  margin-left: 10px;\n}",
+    "answerHtml": "<div class=\"container\">\n  <div>\n    checkbox\n  </div>\n  <label>\n    <input type=\"checkbox\" checked class=\"checkbox\"/>\n    <div class=\"icon\"></div>\n    <div class=\"text\">checked color: lightblue</div>\n  </label>\n  <label>\n    <input type=\"checkbox\" class=\"checkbox\"/>\n    <div class=\"icon\"></div>\n    <div class=\"text\">check2</div>\n  </label>\n</div>",
+    "answerCss": ".container {\n  padding: 20px;\n  text-align: center;\n  background-color: white;\n}\nlabel {\n  display: flex;\n  align-items: center;\n  + label {\n    margin-top: 10px;\n  }\n}\n.icon {\n  width: 30px;\n  height: 30px;\n  border: 1px solid gray;\n  border-radius: 8px;\n}\n.checkbox {\n  position: absolute;\n  overflow: hidden;\n  clip: rect(0 0 0 0);\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  &:checked {\n    + .icon {\n      background-color: lightblue;\n    }\n  }\n}\n.text {\n  margin-left: 10px;\n}"
 }

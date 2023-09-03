@@ -1,8 +1,0 @@
-{
-    "name": "메뉴판",
-    "category": "3",
-    "defaultUserHtml": "<main>\n  <h1>Menu</h1>\n  <ul>\n    <li>\n      <span>짜장면</span>\n      <span>7000원</span>\n    </li>\n    <li>\n      <span>짬뽕</span>\n      <span>10000원</span>\n    </li>\n    <li>\n      <span>탕수육</span>\n      <span>20000원</span>\n    </li>\n  </ul>\n</main>",
-    "defaultUserCss": "main {\n  color: #fff;\n  background-color: #444;\n}\n\nh1 {\n  margin-top: 10px;\n  text-align: center;\n}\n\nul {\n  padding: 20px 10px;\n}\n\n/* 구분선과 텍스트 사이 간격 10px */\n/* 점선은 텍스트 정중앙에 위치, 높이 2px */\n\nli {\n  list-style: none;\n  margin-top: 10px;\n}\n\nli::before {\n  content: \"\";\n}\n\nli span:first-child {\n\n}\n\nli span:last-child {\n\n}",
-    "answerHtml": "<main>\n  <h1>Menu</h1>\n  <ul>\n    <li>\n      <span>짜장면</span>\n      <span>7000원</span>\n    </li>\n    <li>\n      <span>짬뽕</span>\n      <span>10000원</span>\n    </li>\n    <li>\n      <span>탕수육</span>\n      <span>20000원</span>\n    </li>\n  </ul>\n</main>",
-    "answerCss": "main {\n  color: #fff;\n  background-color: #444;\n}\n\nh1 {\n  margin-top: 10px;\n  text-align: center;\n}\n\nul {\n  padding: 20px 10px;\n}\n\n/* 구분선과 텍스트 사이 간격 10px */\n/* 점선은 텍스트 정중앙에 위치, 높이 2px */\n\nli {\n  display: flex;\n  align-items: center;\n  list-style: none;\n  margin-top: 10px;\n  gap: 10px;\n}\n\nli::before {\n  flex: 1 1 0;\n  order: 2;\n  border-top: 2px dashed #fff;\n  content: \"\";\n}\n\nli span:first-child {\n  order: 1;\n}\n\nli span:last-child {\n  order: 3;\n}"
-}
