@@ -9,6 +9,8 @@ import QuizView from '@component/quiz/QuizView';
 import compareMarkup from '@lib/score/compare';
 import styles from './quiz.module.scss';
 
+const DB_VERSION = 1;
+
 interface QuizlistProps {
   quizList: QuizParams[];
   id: string;
@@ -44,7 +46,7 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
   useEffect(() => {
     async function loadIndexedDB() {
       const savedState = await db.markups.get(id);
-      if (savedState) {
+      if (savedState?.version === DB_VERSION && savedState) {
         const { cssState, htmlState, quizClearedState } = savedState;
         setUserHtml(htmlState);
         setUserCss(cssState);
@@ -102,7 +104,7 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
   useEffect(() => {
     // db에 코드 저장
     try {
-      db.markups.put({ id, htmlState: userHtml, cssState: userCss, quizClearedState: quizCleared }, id);
+      db.markups.put({ id, htmlState: userHtml, cssState: userCss, quizClearedState: quizCleared, version: DB_VERSION }, id);
     } catch (error) {
       console.error(error);
     }
