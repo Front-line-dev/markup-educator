@@ -7,6 +7,7 @@ import QuizEditor from '@component/quiz/QuizEditor';
 import QuizResult from '@component/quiz/QuizResult';
 import QuizView from '@component/quiz/QuizView';
 import compareMarkup from '@lib/score/compare';
+import { toPng } from 'html-to-image';
 import styles from './quiz.module.scss';
 
 const DB_VERSION = 1;
@@ -61,45 +62,45 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
     loadIndexedDB();
   }, [id, defaultUserHtml, defaultUserCss]);
 
-  useEffect(() => {
-    // 아이프레임 이벤트 리스너 등록
-    async function handleIframeMessage(event) {
-      if (event?.source?.location?.pathname === 'srcdoc') {
-        // 이벤트가 발생될 때마다 아이프레임 요소 업데이트
-        const iframeType = event.source.frameElement.dataset.type;
-        if (iframeType === 'user') {
-          setUserIframe(event.source);
-        } else if (iframeType === 'answer') {
-          setAnswerIframe(event.source);
-        }
-        // 요소에 접근해서 스코어 계산
-        if (userIframe && answerIframe) {
-          setComparing(true);
-          const currentScore = await compareMarkup(userIframe, answerIframe);
-          setScore(currentScore);
-          setComparing(false);
+  // useEffect(() => {
+  //   // 아이프레임 이벤트 리스너 등록
+  //   async function handleIframeMessage(event) {
+  //     if (event?.source?.location?.pathname === 'srcdoc') {
+  //       // 이벤트가 발생될 때마다 아이프레임 요소 업데이트
+  //       const iframeType = event.source.frameElement.dataset.type;
+  //       if (iframeType === 'user') {
+  //         setUserIframe(event.source);
+  //       } else if (iframeType === 'answer') {
+  //         setAnswerIframe(event.source);
+  //       }
+  //       // 요소에 접근해서 스코어 계산
+  //       if (userIframe && answerIframe) {
+  //         setComparing(true);
+  //         const currentScore = await compareMarkup(userIframe, answerIframe);
+  //         setScore(currentScore);
+  //         setComparing(false);
 
-          // 처음으로 정답을 맞혔을 경우
-          if (currentScore === 1 && quizCleared === false) {
-            setQuizCleared(true);
-            setClearAnimationState(true);
-            setTimeout(() => {
-              setClearAnimationState(false);
-            }, 5000);
-          }
-        }
-      }
-    }
-    window.addEventListener('message', handleIframeMessage);
+  //         // 처음으로 정답을 맞혔을 경우
+  //         if (currentScore === 1 && quizCleared === false) {
+  //           setQuizCleared(true);
+  //           setClearAnimationState(true);
+  //           setTimeout(() => {
+  //             setClearAnimationState(false);
+  //           }, 5000);
+  //         }
+  //       }
+  //     }
+  //   }
+  //   window.addEventListener('message', handleIframeMessage);
 
-    // 아이프레임 이벤트 발생을 위해 이벤트 리스너 등록 후 아이프레임 렌더
-    setIframeListenerReady(true);
+  //   // 아이프레임 이벤트 발생을 위해 이벤트 리스너 등록 후 아이프레임 렌더
+  //   setIframeListenerReady(true);
 
-    return () => {
-      // 아이프레임 이벤트 리스너 제거
-      window.removeEventListener('message', handleIframeMessage);
-    };
-  }, [userIframe, answerIframe, quizCleared]);
+  //   return () => {
+  //     // 아이프레임 이벤트 리스너 제거
+  //     window.removeEventListener('message', handleIframeMessage);
+  //   };
+  // }, [userIframe, answerIframe, quizCleared]);
 
   useEffect(() => {
     // db에 코드 저장
@@ -108,6 +109,25 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
     } catch (error) {
       console.error(error);
     }
+
+    // const makePNG = async () => {
+    //   // userHtml is string of html code
+    //   // 1. make userHtml to html element
+    //   // 2. make userHtml to png image
+    //   // 3. create <img> element and append to body
+
+    //   const userHtmlElement = document.createElement('div');
+    //   userHtmlElement.innerHTML = userHtml;
+    //   const appeneded = document.body.appendChild(userHtmlElement);
+    //   const dataurl = await toPng(userHtmlElement);
+
+    //   const img = document.createElement('img');
+    //   img.src = dataurl;
+    //   document.body.appendChild(img);
+    //   appeneded.remove();
+    // };
+
+    // makePNG();
   }, [userHtml, userCss, id, quizCleared]);
 
   const resetHandler = () => {

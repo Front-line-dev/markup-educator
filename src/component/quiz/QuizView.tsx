@@ -24,11 +24,15 @@ export default function QuizView({ wrapperClass, activate, userHtml, userCss, an
       <div className={styles.result}>
         <div className={classnames(styles.code, { [styles.activate]: activate })}>
           <span className={styles.code_label}>user</span>
-          <div className={styles.canvas}>{iframeListenerReady && <Canvas html={userHtml} css={userCss} type="user" />}</div>
+          <div className={styles.canvas}>
+            <Canvas html={userHtml} css={userCss} />
+          </div>
         </div>
         <div className={classnames(styles.code, { [styles.activate]: !activate })}>
           <span className={styles.code_label}>answer</span>
-          <div className={styles.canvas}>{iframeListenerReady && <Canvas html={answerHtml} css={answerCss} type="answer" />}</div>
+          <div className={styles.canvas}>
+            <Canvas html={answerHtml} css={answerCss} />
+          </div>
         </div>
       </div>
     </div>
