@@ -34,13 +34,13 @@ export default function QuizEditor({ wrapperClass, activate, html, css, handleAc
       </div>
       <div className={styles.editor}>
         <div className={classnames(styles.code, { [styles.activate]: activate })}>
-          <span className={styles.code_label}>html</span>
+          <span className={styles.code_label}>HTML</span>
           <div className={styles.code_inner}>
             <Editor lang="html" initialString={html} setString={handleHtml} setDebouncing={setHtmlDebouncing} editable={editable} />
           </div>
         </div>
         <div className={classnames(styles.code, { [styles.activate]: !activate })}>
-          <span className={styles.code_label}>css</span>
+          <span className={styles.code_label}>SCSS</span>
           <div className={styles.code_inner}>
             <Editor lang="css" initialString={css} setString={handleCss} setDebouncing={setCssDebouncing} editable={editable} />
           </div>
