@@ -40,7 +40,7 @@ export default function QuizEditor({ wrapperClass, activate, html, css, handleAc
           </div>
         </div>
         <div className={classnames(styles.code, { [styles.activate]: !activate })}>
-          <span className={styles.code_label}>SCSS</span>
+          <span className={styles.code_label}>CSS</span>
           <div className={styles.code_inner}>
             <Editor lang="css" initialString={css} setString={handleCss} setDebouncing={setCssDebouncing} editable={editable} />
           </div>
