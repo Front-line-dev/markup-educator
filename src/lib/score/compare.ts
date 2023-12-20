@@ -1,4 +1,4 @@
-import { toPixelData } from 'html-to-image';
+import { toCanvas } from 'html-to-image';
 
 function calcSpectrum(userPixels, answerPixels) {
   const pixelLength = userPixels.length;
@@ -28,24 +28,19 @@ function calcPixelPerfect(userPixels, answerPixels) {
   return (identicalPixels / pixelLength) ** 5;
 }
 
-function getIframeSize(userIframe, answerIframe) {
-  const { width: userWidth, height: userHeight } = userIframe.frameElement.getBoundingClientRect();
-  const { width: answerWidth, height: answerHeight } = answerIframe.frameElement.getBoundingClientRect();
-
-  return {
-    width: Math.floor(Math.min(userWidth, answerWidth)),
-    height: Math.floor(Math.min(userHeight, answerHeight)),
-  };
+async function getPixels(el) {
+  const canvas = await toCanvas(el);
+  const pixels = canvas.getContext("2d").getImageData(0, 0, canvas.width, canvas.height).data;
+  return pixels;
 }
 
 export default async function compareMarkup(userIframe, answerIframe) {
   console.time();
-  const sizeOption = getIframeSize(userIframe, answerIframe);
   let userPixels;
   let answerPixels;
   try {
-    userPixels = await toPixelData(userIframe.document.body, sizeOption);
-    answerPixels = await toPixelData(answerIframe.document.body, sizeOption);
+    userPixels = await getPixels(userIframe.document.body);
+    answerPixels = await getPixels(answerIframe.document.body);
   } catch (error) {
     console.error(error);
     return 0;
