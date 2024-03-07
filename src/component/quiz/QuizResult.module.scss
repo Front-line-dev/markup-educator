@@ -30,8 +30,9 @@
   line-height: 22px;
   vertical-align: top;
   color: #fff;
+  background-color: rgba(#fff, 0.1);
   &:hover {
-    background-color: rgba(#fff, 0.15);
+    background-color: rgba(#fff, 0.2);
   }
 }
 
