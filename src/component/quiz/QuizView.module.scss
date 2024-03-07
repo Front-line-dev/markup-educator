@@ -28,6 +28,9 @@
   width: 100%;
   aspect-ratio: 1 / 1;
   background-color: #272822;
+  border: 1px solid #424242;
+  border-radius: 0 4px 4px 4px;
+  box-sizing: border-box;
 }
 
 @include mediaQuery('tablet') {
