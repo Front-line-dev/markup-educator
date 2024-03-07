@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import useDownloader from 'react-use-downloader';
 import classnames from 'classnames';
 import Editor from '@component/Editor';
@@ -6,6 +7,7 @@ import Canvas from '@component/Canvas';
 import styles from './make.module.scss';
 
 export default function Make() {
+  const router = useRouter();
   const { download } = useDownloader();
   const [userHtml, setUserHtml] = useState('');
   const [userCss, setUserCss] = useState('');
@@ -13,6 +15,7 @@ export default function Make() {
   const [answerCss, setAnswerCss] = useState('');
   const [jsonName, setJsonName] = useState('');
   const [jsonCategory, setJsonCategory] = useState('');
+  const [generatedUrl, setGeneratedUrl] = useState('');
   // Editor 호환용 변수
   const [debouncing, setDebouncing] = useState(false);
 
@@ -70,6 +73,12 @@ export default function Make() {
     input.click();
   }
 
+  function handleGenerate(e) {
+    const url = encodeURIComponent(e.target.value);
+    const host = window.location.href.replace('admin/make', 'workshop/quiz');
+    setGeneratedUrl(`${host}?url=${url}`);
+  }
+
   return (
     <div>
       <main className={styles.main}>
@@ -121,6 +130,14 @@ export default function Make() {
           <button type="button" onClick={handleLoad} className={styles.button}>
             load
           </button>
+          <br />
+          <label>
+            url: <input type="text" onChange={handleGenerate} />
+          </label>
+          <br />
+          <label>
+            generated url: <input type="text" value={generatedUrl} disabled />
+          </label>
         </div>
       </main>
     </div>

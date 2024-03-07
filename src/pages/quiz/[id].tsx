@@ -29,6 +29,7 @@ export default function BuiltInQuiz({ quizList, id, name, category, defaultUserH
       defaultUserCss={defaultUserCss}
       answerHtml={answerHtml}
       answerCss={answerCss}
+      workshop={false}
     />
   );
 }

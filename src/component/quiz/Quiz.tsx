@@ -12,13 +12,14 @@ const DB_VERSION = 1;
 
 interface QuizlistProps {
   quizList: QuizParams[];
-  id: string;
+  id: string | null;
   name: string;
   category: string;
   defaultUserHtml: string;
   defaultUserCss: string;
   answerHtml: string;
   answerCss: string;
+  workshop: boolean;
 }
 
 interface QuizParams {
@@ -27,7 +28,7 @@ interface QuizParams {
   name: string;
 }
 
-export default function Quiz({ quizList, id, name, category, defaultUserHtml, defaultUserCss, answerHtml, answerCss }: QuizlistProps) {
+export default function Quiz({ quizList, id, name, category, defaultUserHtml, defaultUserCss, answerHtml, answerCss, workshop }: QuizlistProps) {
   const [userHtml, setUserHtml] = useState(defaultUserHtml);
   const [userCss, setUserCss] = useState(defaultUserCss);
   const [activeHtmlStateTab, setActiveCodeTab] = useState(true);
@@ -57,8 +58,10 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
       }
     }
 
-    loadIndexedDB();
-  }, [id, defaultUserHtml, defaultUserCss]);
+    if (!workshop) {
+      loadIndexedDB();
+    }
+  }, [id, defaultUserHtml, defaultUserCss, workshop]);
 
   useEffect(() => {
     // 아이프레임 이벤트 리스너 등록
@@ -101,13 +104,15 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
   }, [userIframe, answerIframe, quizCleared]);
 
   useEffect(() => {
-    // db에 코드 저장
-    try {
-      db.markups.put({ id, htmlState: userHtml, cssState: userCss, quizClearedState: quizCleared, version: DB_VERSION }, id);
-    } catch (error) {
-      console.error(error);
+    if (!workshop) {
+      // db에 코드 저장
+      try {
+        db.markups.put({ id, htmlState: userHtml, cssState: userCss, quizClearedState: quizCleared, version: DB_VERSION }, id);
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }, [userHtml, userCss, id, quizCleared]);
+  }, [userHtml, userCss, id, quizCleared, workshop]);
 
   const resetHandler = () => {
     setUserHtml(defaultUserHtml);
@@ -119,7 +124,7 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
       {clearAnimationState && <Confetti width={document.body.clientWidth - 50} height={document.body.clientHeight} recycle={false} />}
       <Header resetHandler={resetHandler} quizList={quizList} />
       <main className={styles.main_wrap}>
-        <h2 className={styles.quiz_name}>{`# Quiz ${id} < ${name} >`}</h2>
+        {workshop ? <h2 className={styles.quiz_name}>{`< ${name} >`}</h2> : <h2 className={styles.quiz_name}>{`# Quiz ${id} < ${name} >`}</h2>}
         <QuizEditor
           wrapperClass={styles.editor}
           activate={activeHtmlStateTab}
@@ -139,6 +144,7 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
             comparing={comparing}
             quizCleared={quizCleared}
             quizList={quizList}
+            workshop={workshop}
           />
           <QuizView
             wrapperClass={styles.view}
