@@ -25,7 +25,7 @@ export default function WorkshopQuiz({ quizList }: QuizlistProps) {
 
   useEffect(() => {
     setQuizReady(false);
-    const url = decodeURIComponent(router.query?.url as string);
+    const urlParam = decodeURIComponent(router.query?.url as string);
 
     async function getQuizData(url) {
       try {
@@ -43,8 +43,8 @@ export default function WorkshopQuiz({ quizList }: QuizlistProps) {
       }
     }
 
-    if (url) {
-      getQuizData(url);
+    if (urlParam) {
+      getQuizData(urlParam);
     }
   }, [router]);
 

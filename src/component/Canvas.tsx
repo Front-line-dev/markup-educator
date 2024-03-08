@@ -14,10 +14,17 @@ export default function Canvas({ html, css, type }: CanvasProps) {
 
   useEffect(() => {
     Sass.compile(css, (result) => {
+      // css가 빈 문자열일 때 예외 적용
+      if (css === '') {
+        setCompiledCss('');
+        return;
+      }
+
       if (result.status === 0) {
         setCompiledCss(result.text);
         setIsShowCssError(false);
       } else {
+        setCompiledCss(css);
         setIsShowCssError(true);
       }
     });
