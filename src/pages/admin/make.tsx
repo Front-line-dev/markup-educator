@@ -92,6 +92,7 @@ export default function Make() {
           <Editor lang="html" initialString={answerHtml} setString={setAnswerHtml} setDebouncing={setDebouncing} editable />
           <Editor lang="css" initialString={answerCss} setString={setAnswerCss} setDebouncing={setDebouncing} editable />
         </div>
+        <h2>PC, Tablet, Mobile 사이즈 미리보기</h2>
         <div className={classnames(styles.canvas_row, styles.tablet)}>
           <div className={styles.canvas_wrap}>
             <Canvas html={userHtml} css={userCss} />
@@ -116,27 +117,35 @@ export default function Make() {
             <Canvas html={answerHtml} css={answerCss} />
           </div>
         </div>
-        <div className={styles.control_wrap}>
+        <div>
+          <h2>JSON 파일 관련 설정</h2>
           <label>
             name: <input type="text" onChange={(e) => setJsonName(e.target.value)} value={jsonName} />
           </label>
+          <br />
           <label>
             category: <input type="text" onChange={(e) => setJsonCategory(e.target.value)} value={jsonCategory} />
           </label>
           <br />
           <button type="button" onClick={handleSave} className={styles.button}>
-            save
+            현재 코드를 JSON으로 저장
           </button>
           <button type="button" onClick={handleLoad} className={styles.button}>
-            load
+            JSON 파일을 현재 코드로 불러오기
           </button>
           <br />
+          <h2>JSON 주소를 입력해서 퀴즈 페이지 공유하기</h2>
+          <p>
+            GitHub Pages 기능을 이용해서 github.io 도메인을 가지는 URL을 생성해주세요
+            <br />
+            생성된 URL을 밑의 JSON URL에 입력한 후 퀴즈 페이지 URL 주소를 복사해서 공유해주세요
+          </p>
           <label>
-            url: <input type="text" onChange={handleGenerate} />
+            JSON URL: <input type="text" onChange={handleGenerate} />
           </label>
           <br />
           <label>
-            generated url: <input type="text" value={generatedUrl} disabled />
+            퀴즈 페이지 URL: <input type="text" value={generatedUrl} disabled />
           </label>
         </div>
       </main>
