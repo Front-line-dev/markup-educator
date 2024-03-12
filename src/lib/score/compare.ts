@@ -30,7 +30,7 @@ function calcPixelPerfect(userPixels, answerPixels) {
 
 async function getPixels(el) {
   const canvas = await toCanvas(el);
-  const pixels = canvas.getContext("2d").getImageData(0, 0, canvas.width, canvas.height).data;
+  const pixels = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
   return pixels;
 }
 
@@ -39,14 +39,15 @@ export default async function compareMarkup(userIframe, answerIframe) {
   let userPixels;
   let answerPixels;
   try {
-    userPixels = await getPixels(userIframe.document.body);
-    answerPixels = await getPixels(answerIframe.document.body);
+    userPixels = await getPixels(userIframe.document.documentElement);
+    answerPixels = await getPixels(answerIframe.document.documentElement);
   } catch (error) {
     console.error(error);
     return 0;
   }
 
   if (userPixels.length !== answerPixels.length) {
+    console.log(userPixels.length, answerPixels.length);
     console.error('Two canvas sizes are not identical');
     return 0;
   }

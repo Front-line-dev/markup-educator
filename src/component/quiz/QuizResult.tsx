@@ -11,6 +11,7 @@ interface QuizResultProps {
   comparing: boolean;
   quizCleared: boolean;
   quizList: QuizParams[];
+  workshop: boolean;
 }
 
 interface QuizParams {
@@ -19,7 +20,7 @@ interface QuizParams {
   name: string;
 }
 
-export default function QuizResult({ wrapperClassName, score, debouncing, comparing, quizCleared, quizList }: QuizResultProps) {
+export default function QuizResult({ wrapperClassName, score, debouncing, comparing, quizCleared, quizList, workshop }: QuizResultProps) {
   const [nextQuiz, setNextQuiz] = useState('');
   const [quizFinished, setQuizFinished] = useState(false);
   const router = useRouter();
@@ -40,13 +41,14 @@ export default function QuizResult({ wrapperClassName, score, debouncing, compar
       <p className={styles.text}>
         {debouncing || comparing ? <span className={styles.comparing} /> : <span className={styles.result}>유사도 {Math.floor(score * 100)}%</span>}
       </p>
-      {quizCleared &&
+      {!workshop &&
+        quizCleared &&
         (quizFinished ? (
-          <Link href="/" role="button" className={classnames(styles.link, 'contrast')}>
+          <Link href="/" role="button" className={styles.link}>
             홈으로 돌아가기
           </Link>
         ) : (
-          <Link href={`/quiz/${nextQuiz}`} role="button" className={classnames(styles.link, 'contrast')}>
+          <Link href={`/quiz/${nextQuiz}`} role="button" className={styles.link}>
             다음 문제로
           </Link>
         ))}
