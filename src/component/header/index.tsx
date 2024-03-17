@@ -20,16 +20,26 @@ function Header({ quizList, resetHandler }: HeaderProps) {
   const router = useRouter();
   const [quizListOpened, setQuizListOpened] = useState(false);
   const [copySuccessPopupVisible, setCopySuccessPopupVisible] = useState(false);
+  const [copyErrorPopupVisible, setCopyErrorPopupVisible] = useState(false);
 
   function toggleQuizListOpened() {
     setQuizListOpened(!quizListOpened);
   }
 
-  function copyUrlButtonHandler() {
-    setCopySuccessPopupVisible(true);
-    setTimeout(() => {
-      setCopySuccessPopupVisible(false);
-    }, 3400);
+  async function copyUrlButtonHandler() {
+    try {
+      await navigator.clipboard.writeText(document.location.href);
+
+      setCopySuccessPopupVisible(true);
+      setTimeout(() => {
+        setCopySuccessPopupVisible(false);
+      }, 3400);
+    } catch (error) {
+      setCopyErrorPopupVisible(true);
+      setTimeout(() => {
+        setCopyErrorPopupVisible(false);
+      }, 3400);
+    }
   }
 
   useEffect(() => {
@@ -68,7 +78,8 @@ function Header({ quizList, resetHandler }: HeaderProps) {
               </div>
             </div>
           )}
-          {copySuccessPopupVisible && <p className={styles.copy_popup_text}>복사 되었습니다</p>}
+          {copySuccessPopupVisible && <p className={styles.copy_popup_text}>현재 페이지 주소를 복사했습니다</p>}
+          {copyErrorPopupVisible && <p className={styles.copy_popup_text}>복사를 실패했습니다</p>}
         </div>
       </div>
     </header>
