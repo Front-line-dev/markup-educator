@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useDownloader from 'react-use-downloader';
 import classnames from 'classnames';
 import Editor from '@component/Editor';
@@ -17,6 +17,16 @@ export default function Make() {
   // Editor 호환용 변수
   const [debouncing, setDebouncing] = useState(false);
   const [buttonStatus, setButtonStatus] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowToast(false);
+    }, 1500);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [showToast]);
 
   function handlePreviewButton() {
     if (buttonStatus) setButtonStatus(false);
@@ -25,8 +35,9 @@ export default function Make() {
 
   async function copyGeneratedUrl() {
     if (generatedUrl) {
-      navigator.clipboard.writeText(generatedUrl);
+      await navigator.clipboard.writeText(generatedUrl);
     }
+    setShowToast(true);
   }
 
   function handleSave() {
@@ -94,8 +105,11 @@ export default function Make() {
       <main className={styles.main}>
         <h1 className={styles.title}>직접 문제를 만들어보자 !</h1>
         <div>
-          <h2 className={styles.sub_title}># JSON</h2>
-          <h3 className={styles.json_title}>1. JSON 파일로 문제 불러오기</h3>
+          <h2 className={styles.json_title}>1. JSON 파일로 문제 불러오기</h2>
+          <p className={styles.description}>
+            <em className={styles.use}>※ 사용방법</em>
+            코드 및 화면 미리보기에서 직접 문제를 만들어 JSON 파일로 만들어보세요.
+          </p>
           <div className={styles.example}>
             <label className={styles.example_label}>
               문제 이름: <input type="text" className={styles.input} onChange={(e) => setJsonName(e.target.value)} value={jsonName} />
@@ -114,7 +128,7 @@ export default function Make() {
           </div>
           <button type="button" className={styles.preview_button} onClick={handlePreviewButton}>
             {buttonStatus ? '▼' : '▶'}
-            미리보기
+            코드 및 화면 미리보기
           </button>
           <div className={classnames(styles.editor_area, { [styles.closed]: !buttonStatus })}>
             <h2>USER HTML / CSS</h2>
@@ -153,7 +167,7 @@ export default function Make() {
               </div>
             </div>
           </div>
-          <h3 className={styles.json_title}>2. JSON 주소를 입력해서 퀴즈 페이지 공유하기</h3>
+          <h2 className={styles.json_title}>2. JSON 주소를 입력해서 퀴즈 페이지 공유하기</h2>
           <p className={styles.description}>
             <em className={styles.use}>※ 사용방법</em>
             GitHub Pages 기능을 이용해서 github.io 도메인을 가지는 URL을 생성해주세요
@@ -166,9 +180,12 @@ export default function Make() {
             </label>
             <span className={classnames(styles.example_label, { [styles.disabled]: generatedUrl.length <= 0 })}>
               퀴즈 페이지 URL: <input type="text" className={styles.input} value={generatedUrl} disabled />
-              <button type="button" className={styles.button_copy} onClick={copyGeneratedUrl} disabled={generatedUrl.length <= 0}>
-                복사하기
-              </button>
+              <span className={styles.box_copy}>
+                <button type="button" className={styles.button_copy} onClick={copyGeneratedUrl}>
+                  복사하기
+                </button>
+                {showToast && <span className={styles.toast}>복사완료 !</span>}
+              </span>
             </span>
           </div>
         </div>
