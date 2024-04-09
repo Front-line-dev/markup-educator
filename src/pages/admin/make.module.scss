@@ -1,7 +1,160 @@
-.main {
+.wrap {
+  overflow: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  min-height: 100%;
+  background-color: #202020;
+}
+
+.main {
+  flex: 1 0 auto;
+  padding: 30px 25px 50px;
+  color: #fff;
+}
+
+.title {
+  font-size: 40px;
+  line-height: 48px;
+  text-align: center;
+}
+
+.sub_title {
+  margin-top: 20px;
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.json_title {
+  margin-top: 20px;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.example {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin-top: 10px;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.example_label {
+  display: flex;
+  flex: 1 0 50%;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 18px;
+  color: #000;
+  &.disabled {
+    color: #666;
+    .input {
+      border-bottom-color: #666;
+    }
+  }
+}
+
+.input {
+  flex: 1 0 auto;
+  margin-left: 5px;
+  border: none;
+  border-bottom: 1px solid #000;
+  &:disabled {
+    background-color: transparent;
+  }
+}
+
+.text {
+  flex-shrink: 0;
+}
+
+.url {
+  margin-left: 5px;
+}
+
+.box_copy {
+  position: relative;
+}
+
+.button_copy {
+  margin-left: 5px;
+  padding: 0 3px;
+  border-radius: 4px;
+  background-color: #9c97cf;
+  cursor: pointer;
+  &:disabled {
+    cursor: default;
+    background-color: #989898;
+  }
+}
+
+.toast {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 5px;
+  padding: 2px 4px;
+  background-color: #bcb8ea;
+  border-radius: 6px;
+  font-size: 10px;
+  line-height: 14px;
+  color: #000;
+  &::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-bottom-color: #bcb8ea;
+  }
+}
+
+.buttons {
+  overflow: hidden;
+  flex-basis: 100%;
+  display: flex;
+  border-top: 1px solid #000;
+  border-radius: 0 0 4px 4px;
+  background-color: #9c97cf;
+}
+
+.example_button {
+  flex: 1 0 50%;
+  padding: 10px;
+  cursor: pointer;
+  & + .example_button {
+    border-left: 1px solid #000;
+  }
+}
+
+.description {
+  margin: 10px 0 0 10px;
+}
+
+.use {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.preview_button {
+  margin-top: 20px;
+  font-size: 28px;
+  line-height: 32px;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.editor_area {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  &.closed {
+    display: none;
+  }
 }
 
 .editor_wrap {
@@ -37,10 +190,4 @@
     width: 366px;
     height: 366px;
   }
-}
-
-.button {
-  margin-right: 5px;
-  padding: 5px;
-  border: 1px solid black;
 }
