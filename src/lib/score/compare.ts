@@ -34,13 +34,30 @@ async function getPixels(el) {
   return pixels;
 }
 
-export default async function compareMarkup(userIframe, answerIframe) {
+export async function compareMarkup(userHtml, userCss, answerHtml, answerCss) {
   console.time();
   let userPixels;
   let answerPixels;
   try {
-    userPixels = await getPixels(userIframe.document.documentElement);
-    answerPixels = await getPixels(answerIframe.document.documentElement);
+    const userIframe = document.createElement('iframe');
+    userIframe.style.display = 'none';
+    document.body.appendChild(userIframe);
+    userIframe.contentDocument.open();
+    userIframe.contentDocument.write(`<style>${userCss}</style>${userHtml}`);
+    userIframe.contentDocument.close();
+
+    const answerIframe = document.createElement('iframe');
+    answerIframe.style.display = 'none';
+    document.body.appendChild(answerIframe);
+    answerIframe.contentDocument.open();
+    answerIframe.contentDocument.write(`<style>${answerCss}</style>${answerHtml}`);
+    answerIframe.contentDocument.close();
+
+    userPixels = await getPixels(userIframe.contentDocument.documentElement);
+    answerPixels = await getPixels(answerIframe.contentDocument.documentElement);
+
+    document.body.removeChild(userIframe);
+    document.body.removeChild(answerIframe);
   } catch (error) {
     console.error(error);
     return 0;

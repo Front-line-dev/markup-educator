@@ -114,6 +114,21 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
     }
   }, [userHtml, userCss, id, quizCleared, workshop]);
 
+  useEffect(() => {
+    const worker = new Worker(new URL('../../worker/scoreWorker.ts', import.meta.url));
+
+    worker.postMessage({ userHtml, userCss });
+
+    worker.addEventListener('message', (event) => {
+      const { score } = event.data;
+      setScore(score);
+    });
+
+    return () => {
+      worker.terminate();
+    };
+  }, [userHtml, userCss]);
+
   const resetHandler = () => {
     setUserHtml(defaultUserHtml);
     setUserCss(defaultUserCss);

@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState, useEffect } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { okaidia } from '@uiw/codemirror-theme-okaidia';
 import { html } from '@codemirror/lang-html';
@@ -34,6 +34,21 @@ export default function Editor({ lang, initialString, setString, setDebouncing, 
       }, 1000)
     );
   };
+
+  useEffect(() => {
+    const worker = new Worker(new URL('../worker/editorWorker.ts', import.meta.url));
+
+    worker.postMessage({ editorString: initialString });
+
+    worker.addEventListener('message', (event) => {
+      const { debouncedString } = event.data;
+      setString(debouncedString);
+    });
+
+    return () => {
+      worker.terminate();
+    };
+  }, [initialString]);
 
   return (
     <CodeMirror value={initialString} theme={okaidia} width="100%" height="380px" extensions={LANG_MAP[lang]} onChange={handleUpdate} readOnly={!editable} />

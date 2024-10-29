@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Sass from 'sass.js';
 import styles from './Canvas.module.scss';
 
 interface CanvasProps {
@@ -13,21 +12,25 @@ export default function Canvas({ html, css, type }: CanvasProps) {
   const [isShowCssError, setIsShowCssError] = useState(false);
 
   useEffect(() => {
-    Sass.compile(css, (result) => {
-      // css가 빈 문자열일 때 예외 적용
-      if (css === '') {
-        setCompiledCss('');
-        return;
-      }
+    const worker = new Worker(new URL('../worker/cssWorker.ts', import.meta.url));
 
-      if (result.status === 0) {
-        setCompiledCss(result.text);
-        setIsShowCssError(false);
-      } else {
+    worker.postMessage({ css });
+
+    worker.addEventListener('message', (event) => {
+      const { compiledCss, error } = event.data;
+
+      if (error) {
         setCompiledCss(css);
         setIsShowCssError(true);
+      } else {
+        setCompiledCss(compiledCss);
+        setIsShowCssError(false);
       }
     });
+
+    return () => {
+      worker.terminate();
+    };
   }, [css]);
 
   return (
