@@ -5,7 +5,6 @@ interface QuizlistProps {
   quizList: QuizParams[];
   id: string;
   name: string;
-  category: string;
   defaultUserHtml: string;
   defaultUserCss: string;
   answerHtml: string;
@@ -18,13 +17,12 @@ interface QuizParams {
   name: string;
 }
 
-export default function BuiltInQuiz({ quizList, id, name, category, defaultUserHtml, defaultUserCss, answerHtml, answerCss }: QuizlistProps) {
+export default function BuiltInQuiz({ quizList, id, name, defaultUserHtml, defaultUserCss, answerHtml, answerCss }: QuizlistProps) {
   return (
     <Quiz
       quizList={quizList}
       id={id}
       name={name}
-      category={category}
       defaultUserHtml={defaultUserHtml}
       defaultUserCss={defaultUserCss}
       answerHtml={answerHtml}
@@ -47,7 +45,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const quizFileData = readQuizFileById(params.id);
+  const { category, ...quizFileData } = readQuizFileById(params.id);
   const files = readQuizFiles();
   return {
     props: { quizList: files, id: params.id, ...quizFileData },

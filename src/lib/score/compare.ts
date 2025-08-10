@@ -1,63 +1,47 @@
 import { toCanvas } from 'html-to-image';
 
-function calcSpectrum(userPixels, answerPixels) {
-  const pixelLength = userPixels.length;
-  const spectrum = new Array(256).fill(0);
-
-  for (let i = 0; i < pixelLength; i += 1) {
-    spectrum[userPixels[i]] += 1;
-    spectrum[answerPixels[i]] -= 1;
-  }
-
-  const MAX_DIFF = pixelLength * 2;
-  const difference = spectrum.reduce((acc, cur) => acc + Math.abs(cur), 0);
-  // 5 root 만큼 보정
-  return (1 - difference / MAX_DIFF) ** (1 / 5);
-}
-
-function calcPixelPerfect(userPixels, answerPixels) {
-  const pixelLength = userPixels.length;
-  let identicalPixels = 0;
-  for (let i = 0; i < pixelLength; i += 1) {
-    if (userPixels[i] === answerPixels[i]) {
-      identicalPixels += 1;
-    }
-  }
-
-  // 5 power 만큼 보정
-  return (identicalPixels / pixelLength) ** 5;
-}
-
-async function getPixels(el) {
+async function getPixels(el: HTMLElement): Promise<Uint8ClampedArray> {
   const canvas = await toCanvas(el);
-  const pixels = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
-  return pixels;
+  const { data } = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
+  return data;
 }
 
-export default async function compareMarkup(userIframe, answerIframe) {
-  console.time();
-  let userPixels;
-  let answerPixels;
-  try {
-    userPixels = await getPixels(userIframe.document.documentElement);
-    answerPixels = await getPixels(answerIframe.document.documentElement);
-  } catch (error) {
-    console.error(error);
-    return 0;
-  }
+export default function compareMarkup(
+  worker: Worker,
+  userIframe: Window,
+  answerIframe: Window
+): Promise<number> {
+  return new Promise((resolve, reject) => {
+    const getAndPostPixels = async () => {
+      try {
+        const userPixels = await getPixels(userIframe.document.documentElement);
+        const answerPixels = await getPixels(answerIframe.document.documentElement);
+        worker.postMessage({ userPixels, answerPixels }, [userPixels.buffer, answerPixels.buffer]);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
+        reject(error);
+      }
+    };
 
-  if (userPixels.length !== answerPixels.length) {
-    console.log(userPixels.length, answerPixels.length);
-    console.error('Two canvas sizes are not identical');
-    return 0;
-  }
+    const messageHandler = (event: MessageEvent<number>) => {
+      resolve(event.data);
+      worker.removeEventListener('message', messageHandler);
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      worker.removeEventListener('error', errorHandler);
+    };
 
-  // compare canvas
-  const scoreSpectrum = calcSpectrum(userPixels, answerPixels);
-  const scorePerfect = calcPixelPerfect(userPixels, answerPixels);
+    const errorHandler = (error: ErrorEvent) => {
+      // eslint-disable-next-line no-console
+      console.error('Worker error:', error);
+      reject(error);
+      worker.removeEventListener('message', messageHandler);
+      worker.removeEventListener('error', errorHandler);
+    };
 
-  // 데스크톱에서 약 50ms 만큼 계산
-  console.timeEnd();
-  // 1점 만점
-  return scoreSpectrum * scorePerfect;
+    worker.addEventListener('message', messageHandler);
+    worker.addEventListener('error', errorHandler);
+
+    getAndPostPixels();
+  });
 }
