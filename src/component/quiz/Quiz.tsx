@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Confetti from 'react-confetti';
 import { db } from '@model/db';
 import Header from '@component/header';
@@ -14,7 +14,6 @@ interface QuizlistProps {
   quizList: QuizParams[];
   id: string | null;
   name: string;
-  category: string;
   defaultUserHtml: string;
   defaultUserCss: string;
   answerHtml: string;
@@ -28,7 +27,8 @@ interface QuizParams {
   name: string;
 }
 
-export default function Quiz({ quizList, id, name, category, defaultUserHtml, defaultUserCss, answerHtml, answerCss, workshop }: QuizlistProps) {
+export default function Quiz({ quizList, id, name, defaultUserHtml, defaultUserCss, answerHtml, answerCss, workshop }: QuizlistProps) {
+  const worker = useRef<Worker>();
   const [userHtml, setUserHtml] = useState(defaultUserHtml);
   const [userCss, setUserCss] = useState(defaultUserCss);
   const [activeHtmlStateTab, setActiveCodeTab] = useState(true);
@@ -64,43 +64,45 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
   }, [id, defaultUserHtml, defaultUserCss, workshop]);
 
   useEffect(() => {
-    // 아이프레임 이벤트 리스너 등록
-    async function handleIframeMessage(event) {
+    worker.current = new Worker(new URL('../../lib/score/compare.worker.ts', import.meta.url));
+    setIframeListenerReady(true);
+
+    function handleIframeMessage(event) {
       if (event?.source?.location?.pathname === 'srcdoc') {
-        // 이벤트가 발생될 때마다 아이프레임 요소 업데이트
         const iframeType = event.source.frameElement.dataset.type;
         if (iframeType === 'user') {
           setUserIframe(event.source);
         } else if (iframeType === 'answer') {
           setAnswerIframe(event.source);
         }
-        // 요소에 접근해서 스코어 계산
-        if (userIframe && answerIframe) {
-          setComparing(true);
-          const currentScore = await compareMarkup(userIframe, answerIframe);
-          setScore(currentScore);
-          setComparing(false);
-
-          // 처음으로 정답을 맞혔을 경우
-          if (currentScore === 1 && quizCleared === false) {
-            setQuizCleared(true);
-            setClearAnimationState(true);
-            setTimeout(() => {
-              setClearAnimationState(false);
-            }, 5000);
-          }
-        }
       }
     }
     window.addEventListener('message', handleIframeMessage);
 
-    // 아이프레임 이벤트 발생을 위해 이벤트 리스너 등록 후 아이프레임 렌더
-    setIframeListenerReady(true);
-
     return () => {
-      // 아이프레임 이벤트 리스너 제거
       window.removeEventListener('message', handleIframeMessage);
+      worker.current.terminate();
     };
+  }, []);
+
+  useEffect(() => {
+    async function compare() {
+      if (userIframe && answerIframe) {
+        setComparing(true);
+        const currentScore = await compareMarkup(worker.current, userIframe, answerIframe);
+        setScore(currentScore);
+        setComparing(false);
+
+        if (currentScore === 1 && quizCleared === false) {
+          setQuizCleared(true);
+          setClearAnimationState(true);
+          setTimeout(() => {
+            setClearAnimationState(false);
+          }, 5000);
+        }
+      }
+    }
+    compare();
   }, [userIframe, answerIframe, quizCleared]);
 
   useEffect(() => {
@@ -109,6 +111,7 @@ export default function Quiz({ quizList, id, name, category, defaultUserHtml, de
       try {
         db.markups.put({ id, htmlState: userHtml, cssState: userCss, quizClearedState: quizCleared, version: DB_VERSION }, id);
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error(error);
       }
     }

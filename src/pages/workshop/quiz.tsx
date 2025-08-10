@@ -54,7 +54,6 @@ export default function WorkshopQuiz({ quizList }: QuizlistProps) {
         quizList={quizList}
         id={null}
         name={name}
-        category={category}
         defaultUserHtml={defaultUserHtml}
         defaultUserCss={defaultUserCss}
         answerHtml={answerHtml}
